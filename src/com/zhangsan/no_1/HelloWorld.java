@@ -7,7 +7,7 @@ package com.zhangsan.no_1;
 public class HelloWorld {
 
     public static void main(String[] args) {
-        System.out.println("是否可以运行。");
+        System.out.println("Hello World");
     }
 
 }

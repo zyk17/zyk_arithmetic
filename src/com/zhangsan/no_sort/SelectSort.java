@@ -19,7 +19,7 @@ public class SelectSort {
         long startTime = System.currentTimeMillis();
         selectSort(arr);
         long endtTime = System.currentTimeMillis();
-        System.out.println("耗时： " + (endtTime-startTime));
+        System.out.println("耗时： " + (endtTime-startTime)+"ms");
         System.out.println("排序后：\n" + Arrays.toString(arr));
     }
 
@@ -44,9 +44,9 @@ public class SelectSort {
      * 数组两个数交换位置
      */
     public static void swap(int[] arr, int a, int b) {
-        int temp = arr[a];
-        arr[a] = arr[b];
-        arr[b] = temp;
+        arr[a] = arr[a] ^ arr[b];
+        arr[b] = arr[a] ^ arr[b];
+        arr[a] = arr[a] ^ arr[b];
     }
 
 

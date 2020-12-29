@@ -3,31 +3,28 @@ package com.zhangsan.no_sort;
 import java.util.Arrays;
 
 /**
- * 冒泡排序
+ * 插入排序
  * @author zhangyuekun
- * @date 2020/12/29 12:21
+ * @date 2020/12/29 12:55
  */
-public class BubbleSort {
+public class InsertionSort {
 
     public static void main(String[] args) {
-        System.err.println("冒泡排序==========================");
+        System.err.println("插入排序==========================");
         int[] arr = {5, 6, 1, 2, 0, 8, 4, 35, 134, 64, 246546, 11, 32};
         System.out.println("排序前：\n" + Arrays.toString(arr));
         System.out.println("================================");
         long startTime = System.currentTimeMillis();
-        bubbleSort(arr);
+        insertionSort(arr);
         long endtTime = System.currentTimeMillis();
         System.out.println("耗时： " + (endtTime-startTime)+"ms");
         System.out.println("排序后：\n" + Arrays.toString(arr));
     }
 
-    public static void bubbleSort(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = arr.length - 1; j > 0; j--) {
-                // 每轮比出最大的
-                if(arr[j] < arr[j-1]){
-                    swap(arr, j, j-1);
-                }
+    public static void insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i; j > 0 && arr[j] < arr[j-1] ; j--) {
+                swap(arr, j, j-1);
             }
         }
     }
