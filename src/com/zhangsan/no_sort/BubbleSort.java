@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 /**
  * 冒泡排序
- * @author zhangyuekun
- * @date 2020/12/29 12:21
  */
 public class BubbleSort {
 
@@ -22,6 +20,7 @@ public class BubbleSort {
     }
 
     public static void bubbleSort(int[] arr) {
+        // 共比数组长度次
         for (int i = 0; i < arr.length; i++) {
             for (int j = arr.length - 1; j > 0; j--) {
                 // 每轮比出最大的

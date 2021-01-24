@@ -4,8 +4,7 @@ import java.util.Arrays;
 
 /**
  * 插入排序
- * @author zhangyuekun
- * @date 2020/12/29 12:55
+ * 左边都是有序数组，然后拿一个和这个有序数组比插入成新的有序数组
  */
 public class InsertionSort {
 

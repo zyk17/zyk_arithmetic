@@ -5,9 +5,6 @@ import java.util.Arrays;
 /**
  * 选择排序
  * 排序方法：（从i开始到数组长度-1）结束，没回比出最小的
- *
- * @author zhangyuekun
- * @date 2020/12/29 11:55
  */
 public class SelectSort {
 
@@ -42,6 +39,7 @@ public class SelectSort {
 
     /**
      * 数组两个数交换位置
+     * @param a,b 下标
      */
     public static void swap(int[] arr, int a, int b) {
         arr[a] = arr[a] ^ arr[b];
