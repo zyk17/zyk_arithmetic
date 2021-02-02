@@ -3,6 +3,7 @@ package com.zhangsan.no_1;
 public class HelloWorld {
 
     public static void main(String[] args) {
+        /** 瞎测的。 */
         int num = 1071824;
         StringBuffer sb = new StringBuffer();
         StringBuffer sb1 = new StringBuffer();

@@ -14,6 +14,7 @@ public class Code01_PrintBinary {
 //        System.out.println(Integer.toBinaryString(i));
 //        printBinary(i);
 
+        // 打印二进制， 与，或，异或，取反操作。
         int a = 1234653;
         int b = 4865321;
         printBinary(a);
@@ -33,6 +34,10 @@ public class Code01_PrintBinary {
         System.out.println(~a);
     }
 
+    /**
+     * 打印int数值的二进制32位信息
+     * @param num
+     */
     public static void printBinary(int num) {
         for (int i = 31; i >= 0; i--) {
             System.out.print( ((num & (1 << i)) == 0) ? 0 : 1 );
