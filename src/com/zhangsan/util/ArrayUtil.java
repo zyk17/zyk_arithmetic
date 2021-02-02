@@ -1,5 +1,7 @@
 package com.zhangsan.util;
 
+import com.zhangsan.no_1.Code01_PrintBinary;
+
 import java.util.Arrays;
 
 /**
@@ -27,10 +29,32 @@ public class ArrayUtil {
         return Arrays.copyOf(arr, arr.length);
     }
 
+    public static void printArr(int[] arr) {
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static boolean isEquals(int[] arr1, int[] arr2) {
+        return Arrays.equals(arr1, arr2);
+    }
+
+    public static void sort(int[] arr) {
+        Arrays.sort(arr);
+    }
+
     public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            System.out.println(Arrays.toString(generateRandomArray(10, 100)));
-        }
+        int a = 10;
+        int b = 0;
+        a = a ^ b;
+        Code01_PrintBinary.printBinary(a);
+        Code01_PrintBinary.printBinary(b);
+        b = a ^ b;
+        Code01_PrintBinary.printBinary(a);
+        Code01_PrintBinary.printBinary(b);
+        a = a ^ b;
+        Code01_PrintBinary.printBinary(a);
+        Code01_PrintBinary.printBinary(b);
+        System.out.println(a);
+        System.out.println(b);
     }
 
 }
