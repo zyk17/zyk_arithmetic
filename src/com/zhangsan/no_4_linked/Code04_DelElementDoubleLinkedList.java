@@ -2,14 +2,14 @@ package com.zhangsan.no_4_linked;
 
 /**
  * @author zhangsan
- * @date 2021/2/2 16:58
+ * @date 2021/2/2 17:35
  */
-public class Code03_DelElementLinkedList {
+public class Code04_DelElementDoubleLinkedList {
     public Node head;
     public Node last;
 
     public void add(String value) {
-        Node node = new Node(value);
+        Node node = new Node(value, last, null);
         if (last == null) {
             head = node;
             last = node;
@@ -17,16 +17,6 @@ public class Code03_DelElementLinkedList {
             last.next = node;
             last = node;
         }
-    }
-
-    public void print() {
-        System.out.print("[");
-        Node cur = head;
-        while (cur != null) {
-            System.out.print(cur + ", ");
-            cur = cur.next;
-        }
-        System.out.print("]\n");
     }
 
     public void del(String value) {
@@ -40,14 +30,41 @@ public class Code03_DelElementLinkedList {
         // 此时 head可能指向一个node也可能为空
         Node cur = head;
         Node pre = head;
-        while (cur != null) {
-            if( cur.data.equals(value) ) {
-                pre.next = cur.next;
-            } else {
-                pre = cur;
+        if (cur != null) {
+            cur.pre = null;
+            while (cur != null) {
+                if (cur.data.equals(value)) {
+                    pre.next = cur.next;
+                    if (cur.next == null) {
+                        break;
+                    }
+                    cur.next.pre = pre;
+                } else {
+                    pre = cur;
+                }
+                cur = cur.next;
             }
+        }
+    }
+
+    public void print() {
+        System.out.print("[");
+        Node cur = head;
+        while (cur != null) {
+            System.out.print(cur + ", ");
             cur = cur.next;
         }
+        System.out.print("]\n");
+    }
+
+    public void reversePrint() {
+        System.out.print("[");
+        Node cur = last;
+        while (cur != null) {
+            System.out.print(cur + ", ");
+            cur = cur.pre;
+        }
+        System.out.print("]\n");
     }
 
     /**
@@ -55,37 +72,46 @@ public class Code03_DelElementLinkedList {
      */
     public class Node {
         public Node next;
+        public Node pre;
         private String data;
 
-        public Node(String data) {
+        public Node(String data, Node pre, Node next) {
             this.data = data;
+            this.pre = pre;
+            this.next = next;
         }
 
         @Override
         public String toString() {
             return "Node{" +
                     "next=" + ((next == null) ? "null" : next.data) +
+                    ", pre=" + ((pre == null) ? "null" : pre.data) +
                     ", data='" + data + '\'' +
                     '}';
         }
     }
 
-
     /**
      * 反转单链表
      */
     public void reverseLinkedList() {
-        // a -> b -> c -> null
-        // c -> b -> a -> null
+        // 	    a -> b -> c -> null
+        //  null  <-  <-
+        // 反转：
+        //	    c -> b -> a -> null
+        //  null  <-  <-
         Node next = null;
         Node pre = null;
+        this.last = this.head;
+
         while (head != null) {
             next = head.next;
             head.next = pre;
+            head.pre = next;
             pre = head;
             head = next;
-            // next=b     a->null   pre=a   head=b
-            // next=c     b->a      pre=b   head=c
+            // next=b     a->null   b<-a  pre=a   head=b
+            // next=c     b->a      c<-b  pre=b   head=c
             // next=null  c->b      pre=c   head=null
         }
         this.head = pre;
@@ -94,9 +120,9 @@ public class Code03_DelElementLinkedList {
 
 }
 
-class TestCode03_DelElementLinkedList {
+class TestCode04_DelElementDoubleLinkedList {
     public static void main(String[] args) {
-        Code03_DelElementLinkedList reverseList = new Code03_DelElementLinkedList();
+        Code04_DelElementDoubleLinkedList reverseList = new Code04_DelElementDoubleLinkedList();
         reverseList.add("a");
         reverseList.add("a");
         reverseList.add("c");
@@ -104,9 +130,8 @@ class TestCode03_DelElementLinkedList {
         reverseList.add("c");
 
         reverseList.print();
-        reverseList.del("c");
+        reverseList.del("a");
         reverseList.print();
-
 
     }
 }
