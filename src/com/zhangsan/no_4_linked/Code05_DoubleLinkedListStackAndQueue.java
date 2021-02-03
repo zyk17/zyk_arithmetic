@@ -86,7 +86,7 @@ public class Code05_DoubleLinkedListStackAndQueue {
     }
 
     /**
-     * 单链表
+     * 双向链表
      */
     public class Node {
         public Node next;

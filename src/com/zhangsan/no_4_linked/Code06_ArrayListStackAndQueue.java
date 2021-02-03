@@ -23,7 +23,7 @@ public class Code06_ArrayListStackAndQueue {
         if(size >= maxSize) {
             throw new ArrayIndexOutOfBoundsException("下标越界");
         }
-        if(addIndex == 5){
+        if(addIndex == maxSize){
             addIndex = 0;
         }
         elements[addIndex++] = val;
