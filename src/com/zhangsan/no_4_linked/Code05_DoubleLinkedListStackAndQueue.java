@@ -1,6 +1,7 @@
 package com.zhangsan.no_4_linked;
 
 /**
+ * 链表实现栈和队列结构
  * @author zhangsan
  * @date 2021/2/2 17:35
  */
