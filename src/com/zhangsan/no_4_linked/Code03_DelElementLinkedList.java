@@ -1,6 +1,7 @@
 package com.zhangsan.no_4_linked;
 
 /**
+ * 单向链表删除元素
  * @author zhangsan
  * @date 2021/2/2 16:58
  */
