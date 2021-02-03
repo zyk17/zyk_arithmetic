@@ -58,8 +58,10 @@ public class Code05_DoubleLinkedListStackAndQueue {
     }
 
     public void delFirst() {
-        if(head != null)
+        if(head != null) {
             head = head.next;
+            head.pre = null;
+        }
     }
 
     public void print() {
