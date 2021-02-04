@@ -66,10 +66,7 @@ public class C004_SmallSum {
         int sum = 0;    // 此次合并的结果
         while (lIndex <= mid && rIndex <= r) {
             if( arr[lIndex] < arr[rIndex]) {
-
                 sum += arr[lIndex] * (r-rIndex + 1);
-
-
                 help[index++] = arr[lIndex++];
             }else {
                 help[index++] = arr[rIndex++];
