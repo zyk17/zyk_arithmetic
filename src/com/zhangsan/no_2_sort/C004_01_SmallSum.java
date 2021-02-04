@@ -8,7 +8,7 @@ import com.zhangsan.util.ArrayUtil;
  * @author zhangsan
  * @date 2021/2/4 16:51
  */
-public class C004_SmallSum {
+public class C004_01_SmallSum {
 
     public static void main(String[] args) {
         // 6, 3, 2, 1, 6, 7
