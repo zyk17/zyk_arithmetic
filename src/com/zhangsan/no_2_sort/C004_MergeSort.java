@@ -37,7 +37,7 @@ public class C004_MergeSort {
         // 1 2 2 3 4 5 6
 
         int[] help = new int[r - l + 1];
-        int index = 0, lIndex = l, rIndex = mid+1;  // index 辅助数组的赋值下标， lIndex：左边下标，rIndex：右边下标
+        int index = 0, lIndex = l, rIndex = mid + 1;  // index 辅助数组的赋值下标， lIndex：左边下标，rIndex：右边下标
         while (lIndex <= mid && rIndex <= r) {
             help[index++] = arr[lIndex] < arr[rIndex] ? arr[lIndex++] : arr[rIndex++];
         }
@@ -51,30 +51,62 @@ public class C004_MergeSort {
             help[index++] = arr[rIndex++];
         }
         // 最后把辅助数组给 拷贝到 数组里
-        while ( r >= l) {
+        do {
             arr[r] = help[--index];
             r--;
+        } while (r >= l);
+    }
+
+    /**
+     * 递归版改迭代版。
+     */
+    public static void mergeSort2(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        int stepSize = 1;
+        int n = arr.length-1;
+
+        while ( stepSize < arr.length ) {
+            int l = 0;
+            // l==n 只有1位也不做了
+            while (l < n) {
+                // mid = L + 步长 -1
+                int mid = l+stepSize-1;
+                if(mid > n) {
+                    break;
+                }
+                // r = mid + 步长。 如果超过了数组长度，就采用数组最后一个地址
+                int r = Math.min(mid + stepSize, n);
+                merge(arr, l, mid, r);
+                l = r + 1;
+            }
+            stepSize <<= 1;
         }
     }
 
 
     public static void main(String[] args) {
-        /*int[] arr = {2, 3, 6, 1, 5, 4, 8, 2};
+        /*int[] arr = {-2, -1, 0, 0, 0, 1, 2, 9, -1, -1};
         ArrayUtil.printArr(arr);
-        mergeSort(arr);
+        mergeSort2(arr);
         ArrayUtil.printArr(arr);*/
 
-
         boolean succeed = true;
-        for (int i = 0; i < 100; i++) {
-            int[] arr1 = ArrayUtil.generateRandomArray(10, 10);
+        for (int i = 0; i < 10000000; i++) {
+            int[] arr1 = ArrayUtil.generateRandomArray(100, 1000000);
             int[] arr2 = ArrayUtil.copyArr(arr1);
 
             ArrayUtil.sort(arr1);
-            mergeSort(arr2);
+            try {
+                mergeSort2(arr2);
+            }catch (Exception e) {
+                System.out.println("=====出现异常：=====");
+                ArrayUtil.printArr(arr2);
+            }
 
             // 排序不成功。
-            if(! ArrayUtil.isEquals(arr1, arr2)) {
+            if (!ArrayUtil.isEquals(arr1, arr2)) {
                 ArrayUtil.printArr(arr1);
                 System.out.println("========================================");
                 ArrayUtil.printArr(arr2);
@@ -82,10 +114,10 @@ public class C004_MergeSort {
                 break;
             }
         }
-        System.out.println(succeed? "排序成功!": "排序有误!");
+        System.out.println(succeed ? "排序成功!" : "排序有误!");
         int[] arr1 = ArrayUtil.generateRandomArray(10, 10);
         ArrayUtil.printArr(arr1);
-        mergeSort(arr1);
+        mergeSort2(arr1);
         ArrayUtil.printArr(arr1);
     }
 }
