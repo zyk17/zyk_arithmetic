@@ -2,8 +2,6 @@ package com.zhangsan.no_2_sort;
 
 import com.zhangsan.util.ArrayUtil;
 
-import java.util.Arrays;
-
 /**
  * 快速排序
  *
