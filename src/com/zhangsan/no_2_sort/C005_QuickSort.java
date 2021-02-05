@@ -2,6 +2,8 @@ package com.zhangsan.no_2_sort;
 
 import com.zhangsan.util.ArrayUtil;
 
+import java.util.Arrays;
+
 /**
  * 快速排序
  *
@@ -70,6 +72,7 @@ public class C005_QuickSort {
         System.out.println("基数：" + stand + "，左边界:" + leftBorder + "，右边界: " + rightBorder);
     }
 
+    // O(logn * n)
     public static void quickSort1(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
