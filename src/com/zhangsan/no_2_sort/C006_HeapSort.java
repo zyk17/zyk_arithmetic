@@ -44,10 +44,17 @@ public class C006_HeapSort {
     }
 
     public static void heapSort(int[] arr) {
-        int heapSize = 0;
-        for (int i = 0; i < arr.length; i++) {
+        if(arr == null || arr.length < 2) {
+            return;
+        }
+        int heapSize = arr.length;
+        // 正向建堆  O(n*logn)
+        /*for (int i = 0; i < arr.length; i++) {
             heapInsert(arr, i);
-            heapSize++;
+        }*/
+        // 反向建堆 O(n)
+        for (int i = arr.length-1; i >= 0; i--) {
+            heapify(arr, i, heapSize);
         }
         // 排序
         for (int i = 1; i < arr.length; i++) {
