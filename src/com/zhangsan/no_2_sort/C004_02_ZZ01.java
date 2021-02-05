@@ -39,6 +39,7 @@ public class C004_02_ZZ01 {
 
     private static int mergeCompute(int[] arr, int l, int mid, int r) {
         int ans = 0;    // 此次合并的结果
+        // 先找结果，因为第一次进来的时候只有两个数，所以直接先算结果，后排序，在。。
         int windowR = mid + 1;
         for (int i = l; i <= mid; i++) {
             while ( windowR <= r && arr[i] > (arr[windowR] << 1) ) {
