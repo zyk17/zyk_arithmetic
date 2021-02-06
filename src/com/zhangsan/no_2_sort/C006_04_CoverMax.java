@@ -45,11 +45,14 @@ public class C006_04_CoverMax {
         System.out.println("测试结束！");
         System.out.println(succeed ? "succeed!" : "wrong fuck!");
 
-        int[][] a = generateLines(maxSize, maxValue);
+        int[][] a = generateLines(10000, 1000);
         int[][] b = copyLines(a);
+        long start = System.nanoTime();
         int r1 = getCoverMax(a);
+        long end = System.nanoTime();
         int r2 = compareM(b);
-        System.out.println(r1 + "\t" + r2);
+        long end1 = System.nanoTime();
+        System.out.println(r1 + "\t" + r2+"耗时：" + (end-start) + "耗时：" + (end1-end));
     }
 
     public static int getCoverMax(int[][] lines) {
