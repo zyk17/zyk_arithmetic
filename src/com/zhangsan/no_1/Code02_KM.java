@@ -28,14 +28,9 @@ public class Code02_KM {
             }
         }
 
-        int ans = -1;
+        int ans = 0;
         for (int i = a.length - 1; i >= 0; i--) {
-
-            if ((a[i] % m == k)) {
-                ans ^= (1<<i);
-            }
-            /*
-            if ((a[i] % m == 0)) {
+            if(a[i] % m == 0) {
                 continue;
             }
             if ((a[i] % m == k)) {
@@ -45,10 +40,8 @@ public class Code02_KM {
             } else {
                 return -1;
             }
-            */
         }
-        // 拿-1做异或运算，然后取反返回。如果正确答案刚好是-1但是参数传错，结果返回的-1是代表的错误未找到，而不是正确答案位-1
-        return ans == -1 ? -1: ~ans;
+        return ans;
     }
 
     /**
@@ -73,9 +66,13 @@ public class Code02_KM {
 
     public static void main(String[] args) {
 
+        int[] arr2 = {0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2};
+        System.out.println(km(arr2, 3, 4));
+        System.out.println(compareM(arr2, 3, 4));
+
         int maxValue = 100;
         int kinds = 10;
-        int testTimes = 10;
+        int testTimes = 1000;
         int max = 10;
 
         System.out.println("测试开始");
@@ -88,13 +85,14 @@ public class Code02_KM {
                 m++;
             int[] arr = generateTheTestArray(kinds, maxValue, k, m);
 
-            System.out.println("k: " + k + ", m: " + m);
-            ArrayUtil.printArr(arr);
+            /*System.out.println("k: " + k + ", m: " + m);
+            ArrayUtil.printArr(arr);*/
 
             int r1 = km(arr, k, m);
             int r2 = compareM(arr, k, m);
             if (r1 != r2) {
                 System.out.println("出错了。。");
+                System.out.println("k: " + k + ", m: " + m);
                 ArrayUtil.printArr(arr);
                 System.out.println(r1 + "\t" + r2);
             }
