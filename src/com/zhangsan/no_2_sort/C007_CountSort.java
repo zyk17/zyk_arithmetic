@@ -13,7 +13,7 @@ import com.zhangsan.util.ArrayUtil;
  */
 public class C007_CountSort {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         /*int[] arr = {18, 55, 25, 38, 24, 46, 64, 52, 19, 34, 64, 18, 69, 46, 52,
                 41, 66, 34, 28, 49, 67, 28, 19, 65, 59, 65, 25, 35, 26, 19, 65, 25};
         int[] arr1 = ArrayUtil.copyArr(arr);
