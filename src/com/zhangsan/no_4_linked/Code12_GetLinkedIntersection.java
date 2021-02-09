@@ -262,8 +262,8 @@ class TestGetLinkedIntersection {
         Code12_GetLinkedIntersection.Node j = new Code12_GetLinkedIntersection.Node(10);
         a.next = b; b.next = c; c.next = d; d.next = e; e.next = f;
         f.next = c;
-        g.next = h; h.next = i; i.next = j; i.next = j;
-        j.next = b;
+        g.next = h; h.next = i; i.next = j; // j.next = h;
+//        j.next = b;
 //        System.out.println(linked.getLoopNode(a));
 //        System.out.println(linked.getLoopNode2(a));
         System.out.println(linked.getFirstNodeAtTwoLinked2(a, g));
