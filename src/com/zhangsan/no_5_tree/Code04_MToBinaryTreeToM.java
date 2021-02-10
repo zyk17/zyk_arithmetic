@@ -14,9 +14,7 @@ import java.util.Queue;
  */
 public class Code04_MToBinaryTreeToM {
 
-    /**
-     * 二叉树
-     */
+    /** 二叉树 */
     public static class BinaryTree {
         String data;
         BinaryTree left;
@@ -27,9 +25,7 @@ public class Code04_MToBinaryTreeToM {
         }
     }
 
-    /**
-     * 多叉树
-     */
+    /** 多叉树 */
     public static class Node {
         String data;
         List<Node> children;
@@ -45,9 +41,7 @@ public class Code04_MToBinaryTreeToM {
         }
     }
 
-    /**
-     * 多叉树转成二叉树
-     */
+    /** 多叉树转成二叉树 */
     public static BinaryTree encode(Node head) {
         if (head == null) {
             return null;
@@ -73,9 +67,7 @@ public class Code04_MToBinaryTreeToM {
         }
     }
 
-    /**
-     * 二叉树转会多叉树
-     */
+    /** 二叉树转会多叉树 */
     public static Node decode(BinaryTree bt) {
         if (bt == null) {
             return null;
@@ -98,9 +90,7 @@ public class Code04_MToBinaryTreeToM {
     }
 
 
-    /**
-     * 按层多叉树
-     */
+    /** 按层多叉树 */
     public static void printNode(Node head) {
         if (head == null) {
             return;
@@ -118,9 +108,7 @@ public class Code04_MToBinaryTreeToM {
         System.out.println();
     }
 
-    /**
-     * 按层二叉树
-     */
+    /** 按层二叉树 */
     public static void level(BinaryTree head) {
         if (head == null) {
             return;
@@ -160,19 +148,11 @@ class TestCode04 {
         Code04_MToBinaryTreeToM.Node m = new Code04_MToBinaryTreeToM.Node("m");
         Code04_MToBinaryTreeToM.Node n = new Code04_MToBinaryTreeToM.Node("n");
 
-        a.children.add(b);
-        a.children.add(c);
-        a.children.add(d);
-        b.children.add(e);
-        b.children.add(f);
-        b.children.add(g);
+        a.children.add(b); a.children.add(c); a.children.add(d);
+        b.children.add(e); b.children.add(f); b.children.add(g);
         c.children.add(h);
-        d.children.add(i);
-        d.children.add(j);
-        d.children.add(k);
-        h.children.add(l);
-        h.children.add(m);
-        h.children.add(n);
+        d.children.add(i); d.children.add(j); d.children.add(k);
+        h.children.add(l); h.children.add(m); h.children.add(n);
 
         Code04_MToBinaryTreeToM.printNode(a);
 
