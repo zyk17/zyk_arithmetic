@@ -22,7 +22,8 @@ public class Code05_BTGetMaxNodeInLevel {
         }
     }
 
-    /** 找到每层上节点最大的层数 */
+    /** 找到每层上节点最大的层数
+     * 明确知道第一层结束的位置，然后每层结束就设置好下一层结束的位置。然后有了结束的位置就可以计算 */
     public static int getMaxNodeInLevel(BinaryTree head) {
         if (head == null) {
             return 0;
@@ -51,7 +52,8 @@ public class Code05_BTGetMaxNodeInLevel {
         max = Math.max(max, levelCount);
         return max;
     }
-    /** 通过容器 */
+    /** 通过容器
+     * 明确知道第一层，然后后序把每一层的层级都加入到hash表中。然后在计算 */
     public static int getMaxNodeInLevel2(BinaryTree head) {
         if (head == null) {
             return 0;
