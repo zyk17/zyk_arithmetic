@@ -1,5 +1,7 @@
 package com.zhangsan.no_5_tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -95,6 +97,26 @@ public class Code02_RecursiveTraversalBT {
         System.out.println();
     }
 
+    public static void level(Node head) {
+        if(head == null) {
+            return;
+        }
+        System.out.println("按层遍历:");
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(head);
+        while (! queue.isEmpty()) {
+            head = queue.poll();
+            System.out.print(head.data + " ");
+            if(head.left != null) {
+                queue.add(head.left);
+            }
+            if(head.right != null) {
+                queue.add(head.right);
+            }
+        }
+        System.out.println();
+    }
+
     public static class Node {
         String data;
         Node left;
@@ -136,6 +158,9 @@ class TestRecursiveTraversalBT {
         Code02_RecursiveTraversalBT.pos1(a);
         Code02_RecursiveTraversalBT.pos(a);
         System.out.println();
+
+
+        Code02_RecursiveTraversalBT.level(a);
 
     }
 }
