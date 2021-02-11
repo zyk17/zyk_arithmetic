@@ -25,11 +25,6 @@ public class Code08_IsFBT {
         if(head == null) {
             return true;
         }
-        Node cur = head;
-        while (cur.left != null && cur.right != null) {
-
-        }
-        System.out.println("按层遍历:");
         Queue<Node> queue = new LinkedList<>();
         queue.add(head);
 
@@ -74,6 +69,25 @@ public class Code08_IsFBT {
 
 class TestCode08 {
     public static void main(String[] args) {
+        Code08_IsFBT.Node a = new Code08_IsFBT.Node("a");
+        Code08_IsFBT.Node b = new Code08_IsFBT.Node("b");
+        Code08_IsFBT.Node c = new Code08_IsFBT.Node("c");
+        Code08_IsFBT.Node d = new Code08_IsFBT.Node("d");
+        Code08_IsFBT.Node e = new Code08_IsFBT.Node("e");
+        Code08_IsFBT.Node f = new Code08_IsFBT.Node("f");
+        Code08_IsFBT.Node g = new Code08_IsFBT.Node("g");
+        Code08_IsFBT.Node h = new Code08_IsFBT.Node("h");
+        Code08_IsFBT.Node i = new Code08_IsFBT.Node("i");
 
+        a.left=b; a.right=c;
+        b.left=d; b.right=e;
+        c.left=f; c.right=g;
+
+//        b.left = null;
+//        b.right = null;
+//        c.right = null;
+        c.left = null;
+
+        System.out.println(Code08_IsFBT.isFBT(a));
     }
 }
