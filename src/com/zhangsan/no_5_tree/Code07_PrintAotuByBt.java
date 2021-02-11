@@ -94,9 +94,9 @@ public class Code07_PrintAotuByBt {
 
 class TestCode07 {
     public static void main(String[] args) {
-        Code07_PrintAotuByBt.printAoto2(10);
+        Code07_PrintAotuByBt.printAoto2(8);
 
-        Code07_PrintAotuByBt.Node node = Code07_PrintAotuByBt.printAoto(10);
+        Code07_PrintAotuByBt.Node node = Code07_PrintAotuByBt.printAoto(8);
         Code07_PrintAotuByBt.in(node);
     }
 }
