@@ -52,13 +52,13 @@ public class Code07_PrintAotuByBt {
         System.out.println();
     }
 
-    public static void printAoto2(int i, int n, String print){
-        if(i > n) {
+    public static void printAoto2(int curLevel, int level, String print){
+        if(curLevel > level) {
             return;
         }
-        printAoto2(i+1, n, (i+1)+"凹");
+        printAoto2(curLevel+1, level, (curLevel+1)+"凹");
         System.out.print(print+" ");
-        printAoto2(i+1, n, (i+1)+"凸");
+        printAoto2(curLevel+1, level, (curLevel+1)+"凸");
     }
 
 
