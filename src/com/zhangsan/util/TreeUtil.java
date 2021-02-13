@@ -15,6 +15,20 @@ public class TreeUtil {
      * 生成一个随机的二叉树
      */
     public static BinaryTree generateRandomTree(int maxLevel, int maxValue) {
+        return generate(1, maxLevel, maxValue);
+    }
+
+    private static BinaryTree generate(int level, int maxLevel, int maxValue) {
+        if(level > maxLevel || Math.random() < 0.2){
+            return null;
+        }
+        BinaryTree head = new BinaryTree( (int) (Math.random() * maxValue + 1) );
+        head.left = generate( level+1, maxLevel, maxValue );
+        head.right = generate( level+1, maxLevel, maxValue );
+        return head;
+    }
+
+    public static BinaryTree generateRandomTree2(int maxLevel, int maxValue) {
         maxLevel = (int) (Math.random() * maxLevel + 1);
         if( Math.random() < 0.02 ) {
             // 百分之2的概率返回空
@@ -63,21 +77,19 @@ public class TreeUtil {
         return head;
     }
 
-    public static BinaryTree generateRandomTree2(int maxLevel, int maxValue) {
-        return generate(1, maxLevel, maxValue);
-    }
-
-    private static BinaryTree generate(int level, int maxLevel, int maxValue) {
-        if(level > maxLevel || Math.random() < 0.2){
-            return null;
-        }
-        BinaryTree head = new BinaryTree( (int) (Math.random() * maxValue + 1) );
-        head.left = generate( level+1, maxLevel, maxValue );
-        head.right = generate( level+1, maxLevel, maxValue );
-        return head;
-    }
-
     public static BinaryTree copyBT(BinaryTree head) {
+        return copyProcess(head);
+    }
+
+    private static BinaryTree copyProcess(BinaryTree head) {
+        if(head == null) { return null; }
+        BinaryTree target = new BinaryTree(head.value);
+        target.left = copyProcess(head.left);
+        target.right = copyProcess(head.right);
+        return target;
+    }
+
+    public static BinaryTree copyBT2(BinaryTree head) {
         if(head == null) { return null; }
 
         Queue<BinaryTree> queue = new LinkedList<>();
