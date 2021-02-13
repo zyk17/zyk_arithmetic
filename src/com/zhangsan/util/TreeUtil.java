@@ -40,10 +40,10 @@ public class TreeUtil {
             left = null;
             right = null;
             if(cur == null) { continue; }
-            if( Math.random() > 0.25 ) {
+            if( Math.random() > 0.1 ) {
                 left = new BinaryTree( (int) (Math.random() * maxValue + 1) );
             }
-            if( Math.random() > 0.25 ) {
+            if( Math.random() > 0.1 ) {
                 right = new BinaryTree( (int) (Math.random() * maxValue + 1) );
             }
             cur.left = left;
