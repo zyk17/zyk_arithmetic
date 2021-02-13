@@ -63,6 +63,19 @@ public class TreeUtil {
         return head;
     }
 
+    public static BinaryTree generateRandomTree2(int maxLevel, int maxValue) {
+        return generate(1, maxLevel, maxValue);
+    }
+
+    private static BinaryTree generate(int level, int maxLevel, int maxValue) {
+        if(level > maxLevel || Math.random() < 0.2){
+            return null;
+        }
+        BinaryTree head = new BinaryTree( (int) (Math.random() * maxValue + 1) );
+        head.left = generate( level+1, maxLevel, maxValue );
+        head.right = generate( level+1, maxLevel, maxValue );
+        return head;
+    }
 
     public static BinaryTree copyBT(BinaryTree head) {
         if(head == null) { return null; }
@@ -174,7 +187,7 @@ public class TreeUtil {
 
     public static void main(String[] args) {
         for (int i = 0; i < 3; i++) {
-            BinaryTree binaryTree = generateRandomTree(6, 90);
+            BinaryTree binaryTree = generateRandomTree2(6, 90);
             BinaryTree binaryTree2 = copyBT(binaryTree);
             level(binaryTree);
             level(binaryTree2);
