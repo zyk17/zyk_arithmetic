@@ -19,7 +19,7 @@ public class TreeUtil {
     }
 
     private static BinaryTree generate(int level, int maxLevel, int maxValue) {
-        if(level > maxLevel || Math.random() < 0.2){
+        if(level > maxLevel || Math.random() < 0.1){
             return null;
         }
         BinaryTree head = new BinaryTree( (int) (Math.random() * maxValue + 1) );
