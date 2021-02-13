@@ -8,15 +8,15 @@ package com.zhangsan.util;
  */
 public class BinaryTree {
 
-    public String value;
+    public int value;
     public BinaryTree left;
     public BinaryTree right;
 
-    public BinaryTree(String value) {
+    public BinaryTree(int value) {
         this.value = value;
     }
 
-    public BinaryTree(String value, BinaryTree left, BinaryTree right) {
+    public BinaryTree(int value, BinaryTree left, BinaryTree right) {
         this.value = value;
         this.left = left;
         this.right = right;
