@@ -1,8 +1,154 @@
 package com.zhangsan.util;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
+ * 树的工具类
+ *
  * @author zhangsan
  * @date 2021/2/13 15:38
  */
 public class TreeUtil {
+
+    /**
+     * 生成一个随机的二叉树
+     */
+    public static BinaryTree generateRandomTree(int maxLevel, int maxValue) {
+        maxLevel = (int) (Math.random() * maxLevel + 1);
+        if( Math.random() < 0.02 ) {
+            // 百分之2的概率返回空
+            return null;
+        }
+        BinaryTree head = new BinaryTree( (int) (Math.random() * maxValue + 1) );
+
+        Queue<BinaryTree> queue = new LinkedList<>();
+        queue.add(head);
+
+        BinaryTree cur = null;
+        BinaryTree left = null;
+        BinaryTree right = null;
+
+        BinaryTree nextEnd = null;
+        BinaryTree curEnd = head;
+        int curLevel = 1;
+        while (! queue.isEmpty()) {
+            if(curLevel == maxLevel) {
+                break;
+            }
+            cur = queue.poll();
+            left = null;
+            right = null;
+            if(cur == null) { continue; }
+            if( Math.random() > 0.25 ) {
+                left = new BinaryTree( (int) (Math.random() * maxValue + 1) );
+            }
+            if( Math.random() > 0.25 ) {
+                right = new BinaryTree( (int) (Math.random() * maxValue + 1) );
+            }
+            cur.left = left;
+            cur.right = right;
+            queue.add(left);
+            queue.add(right);
+
+            if(left != null || right != null) {
+                nextEnd = right != null? right: left;
+            }
+
+            if(curEnd == cur) {
+                curEnd = nextEnd;
+                curLevel++;
+            }
+        }
+        return head;
+    }
+
+    public static void pre(BinaryTree head) {
+        if(head == null) {
+            return;
+        }
+        System.out.print(head.value + " ");
+        pre(head.left);
+        pre(head.right);
+    }
+
+    public static void in(BinaryTree head) {
+        if(head == null) {
+            return;
+        }
+        in(head.left);
+        System.out.print(head.value + " ");
+        in(head.right);
+    }
+
+    public static void pos(BinaryTree head) {
+        if(head == null) {
+            return;
+        }
+        pos(head.left);
+        pos(head.right);
+        System.out.print(head.value + " ");
+    }
+
+    public static void level(BinaryTree head) {
+        if(head == null) {
+            return;
+        }
+        System.out.println("按层遍历:");
+        Queue<BinaryTree> queue = new LinkedList<>();
+        queue.add(head);
+
+        BinaryTree nextEnd = null;
+        BinaryTree curEnd = head;
+        while (! queue.isEmpty()) {
+            head = queue.poll();
+            System.out.print(head.value + " ");
+            if(head.left != null) {
+                queue.add(head.left);
+                nextEnd = head.left;
+            }
+            if(head.right != null) {
+                queue.add(head.right);
+                nextEnd = head.right;
+            }
+
+
+            if(curEnd == head) {
+                System.out.println();
+                curEnd = nextEnd;
+            }
+        }
+        System.out.println();
+    }
+
+    public static void level1(BinaryTree head) {
+        if(head == null) {
+            return;
+        }
+        System.out.println("按层遍历:");
+        Queue<BinaryTree> queue = new LinkedList<>();
+        queue.add(head);
+        while (! queue.isEmpty()) {
+            head = queue.poll();
+            System.out.print(head.value + " ");
+            if(head.left != null) {
+                queue.add(head.left);
+            }
+            if(head.right != null) {
+                queue.add(head.right);
+            }
+        }
+        System.out.println();
+    }
+
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 1; i++) {
+            BinaryTree binaryTree = generateRandomTree(6, 90);
+            level(binaryTree);
+            System.out.println();
+        }
+
+    }
+
 }
