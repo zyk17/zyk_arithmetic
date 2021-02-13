@@ -2,6 +2,7 @@ package com.zhangsan.util;
 
 /**
  * 二叉树
+ *
  * @author zhangsan
  * @date 2021/2/13 14:13
  */
@@ -11,7 +12,7 @@ public class BinaryTree {
     public BinaryTree left;
     public BinaryTree right;
 
-    public BinaryTree ( String value ) {
+    public BinaryTree(String value) {
         this.value = value;
     }
 
@@ -21,5 +22,15 @@ public class BinaryTree {
         this.right = right;
     }
 
-    public BinaryTree(){}
+    public BinaryTree() {
+    }
+
+    @Override
+    public String toString() {
+        return "BinaryTree{" +
+                "value='" + value + '\'' +
+                ", left=" + (left == null ? "null" : left.value) +
+                ", right=" + (right == null ? "null" : right.value) +
+                '}';
+    }
 }
