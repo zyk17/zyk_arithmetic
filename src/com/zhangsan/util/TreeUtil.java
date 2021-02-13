@@ -63,6 +63,36 @@ public class TreeUtil {
         return head;
     }
 
+
+    public static BinaryTree copyBT(BinaryTree head) {
+        if(head == null) { return null; }
+
+        Queue<BinaryTree> queue = new LinkedList<>();
+        Queue<BinaryTree> queue2 = new LinkedList<>();
+        queue.add(head);
+
+        BinaryTree cp = new BinaryTree(head.value);
+        queue2.add(cp);
+        BinaryTree target;
+        while (! queue.isEmpty()) {
+            head = queue.poll();
+            target = queue2.poll();
+            if(head.left != null) {
+                queue.add(head.left);
+                BinaryTree targetLeft = new BinaryTree(head.left.value);
+                queue2.add(targetLeft);
+                target.left = targetLeft;
+            }
+            if(head.right != null) {
+                queue.add(head.right);
+                BinaryTree targetRight = new BinaryTree(head.right.value);
+                queue2.add(targetRight);
+                target.right = targetRight;
+            }
+        }
+        return cp;
+    }
+
     public static void pre(BinaryTree head) {
         if(head == null) {
             return;
@@ -143,12 +173,13 @@ public class TreeUtil {
 
 
     public static void main(String[] args) {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 3; i++) {
             BinaryTree binaryTree = generateRandomTree(6, 90);
+            BinaryTree binaryTree2 = copyBT(binaryTree);
             level(binaryTree);
+            level(binaryTree2);
             System.out.println();
         }
 
     }
-
 }
