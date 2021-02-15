@@ -46,6 +46,10 @@ public class ArrayUtil {
         return Arrays.copyOf(arr, arr.length);
     }
 
+    public static String[] copyArr(String[] arr) {
+        return Arrays.copyOf(arr, arr.length);
+    }
+
     public static void printArr(int[] arr) {
         System.out.println(Arrays.toString(arr));
     }
@@ -73,5 +77,4 @@ public class ArrayUtil {
         System.out.println(a);
         System.out.println(b);
     }
-
 }
