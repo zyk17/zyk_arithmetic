@@ -25,6 +25,23 @@ public class ArrayUtil {
         return arr;
     }
 
+    public static String[] generateRandomStringArray(int maxSize, int maxStringLength) {
+        String[] arr = new String[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = generateRandomString(maxStringLength);
+        }
+        return arr;
+    }
+
+    private static String generateRandomString(int maxStringLength) {
+        char[] ans = new char[(int) ((maxStringLength + 1) * Math.random())];
+        for (char c : ans) {
+            int value = (int) (Math.random() * 5);
+            c = (Math.random() < 0.5) ? (char) ((65) + value): (char) (97 + value);
+        }
+        return new String(ans);
+    }
+
     public static int[] copyArr(int[] arr){
         return Arrays.copyOf(arr, arr.length);
     }
