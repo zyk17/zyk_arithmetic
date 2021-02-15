@@ -35,9 +35,9 @@ public class ArrayUtil {
 
     private static String generateRandomString(int maxStringLength) {
         char[] ans = new char[(int) ((maxStringLength + 1) * Math.random())];
-        for (char c : ans) {
+        for (int i = 0; i < ans.length; i++) {
             int value = (int) (Math.random() * 5);
-            c = (Math.random() < 0.5) ? (char) ((65) + value): (char) (97 + value);
+            ans[i] = (Math.random() < 0.5) ? (char) ((65) + value): (char) (97 + value);
         }
         return new String(ans);
     }
@@ -60,7 +60,7 @@ public class ArrayUtil {
 
     public static void main(String[] args) {
         int a = 10;
-        int b = 0;
+        int b = 6;
         a = a ^ b;
         Code01_PrintBinary.printBinary(a);
         Code01_PrintBinary.printBinary(b);
