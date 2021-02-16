@@ -1,4 +1,4 @@
-package com.zhangsan.no_1;
+package com.zhangsan.no_1_binary;
 
 import com.zhangsan.util.ArrayUtil;
 

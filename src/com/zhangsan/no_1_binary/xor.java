@@ -1,6 +1,4 @@
-package com.zhangsan.no_1;
-
-import com.zhangsan.util.ArrayUtil;
+package com.zhangsan.no_1_binary;
 
 import java.util.HashMap;
 import java.util.Map;
