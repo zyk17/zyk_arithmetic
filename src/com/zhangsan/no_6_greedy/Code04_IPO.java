@@ -1,7 +1,6 @@
 package com.zhangsan.no_6_greedy;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -22,18 +21,29 @@ public class Code04_IPO {
             this.costAmount = costAmount;
             this.profitAmount = profitAmount;
         }
+
+        @Override
+        public String toString() {
+            return "Project{" +
+                    "costAmount=" + costAmount +
+                    ", profitAmount=" + profitAmount +
+                    '}';
+        }
     }
 
 
     public static int ipo(Project[] projects, int sum, int n) {
         // 小根堆，按花费金额存放项目
-        PriorityQueue<Project> smallHeap = new PriorityQueue<Project>((a, b) -> b.costAmount-a.costAmount);
+        PriorityQueue<Project> smallHeap = new PriorityQueue<>((a, b) -> a.costAmount-b.costAmount);
         // 大根堆，根据利润存放项目
-        PriorityQueue<Project> bigHeap = new PriorityQueue<Project>(Comparator.comparingInt(a -> a.profitAmount));
-
+        PriorityQueue<Project> bigHeap = new PriorityQueue<>((a, b) -> b.profitAmount-a.profitAmount);
         smallHeap.addAll(Arrays.asList(projects));
+//        for (Project project : projects) {
+//            smallHeap.add(project);
+//        }
+
         while (n > 0) {
-            while (smallHeap.size() > 0 && smallHeap.peek().costAmount < sum) {
+            while (smallHeap.size() > 0 && smallHeap.peek().costAmount <= sum) {
                 bigHeap.add(smallHeap.poll());
             }
             if(bigHeap.isEmpty()) {
@@ -49,6 +59,12 @@ public class Code04_IPO {
     public static void main(String[] args) {
 
         Project[] projects = new Project[5];
+        projects[0] = new Project(1, 2);
+        projects[1] = new Project(6, 5);
+        projects[2] = new Project(3, 4);
+        projects[3] = new Project(2, 5);
+        projects[4] = new Project(4, 3);
+        System.out.println(ipo(projects, 2, 3));
 
 
         /*int times = 10000;
