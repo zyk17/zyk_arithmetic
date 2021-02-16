@@ -1,7 +1,5 @@
 package com.zhangsan.util;
 
-import com.zhangsan.no_1.Code01_PrintBinary;
-
 import java.util.Arrays;
 
 /**
@@ -62,19 +60,4 @@ public class ArrayUtil {
         Arrays.sort(arr);
     }
 
-    public static void main(String[] args) {
-        int a = 10;
-        int b = 6;
-        a = a ^ b;
-        Code01_PrintBinary.printBinary(a);
-        Code01_PrintBinary.printBinary(b);
-        b = a ^ b;
-        Code01_PrintBinary.printBinary(a);
-        Code01_PrintBinary.printBinary(b);
-        a = a ^ b;
-        Code01_PrintBinary.printBinary(a);
-        Code01_PrintBinary.printBinary(b);
-        System.out.println(a);
-        System.out.println(b);
-    }
 }
