@@ -15,9 +15,9 @@ public class UnionSet<V> {
         }
     }
 
-    public Map<V, Node<V>> nodes = new HashMap<>();
-    public Map<Node<V>, Node<V>> parents = new HashMap<>();
-    public Map<Node<V>, Integer> sizeMap = new HashMap<>();
+    private Map<V, Node<V>> nodes = new HashMap<>();
+    private Map<Node<V>, Node<V>> parents = new HashMap<>();
+    private Map<Node<V>, Integer> sizeMap = new HashMap<>();
 
     public UnionSet(List<V> list) {
         init(list);
@@ -36,7 +36,7 @@ public class UnionSet<V> {
     /**
      * 找到头节点
      */
-    public Node<V> findHead(Node<V> v) {
+    private Node<V> findHead(Node<V> v) {
         // 优化：把寻找过程中的节点的头节点指向head
         Stack<Node<V>> stack = new Stack<>();
         while (v != parents.get(v)) {
@@ -78,4 +78,9 @@ public class UnionSet<V> {
             sizeMap.remove(small);
         }
     }
+
+    public int sets() {
+        return sizeMap.size();
+    }
+
 }
