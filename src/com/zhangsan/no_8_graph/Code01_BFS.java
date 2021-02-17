@@ -39,15 +39,6 @@ public class Code01_BFS {
     }
 
     public static void main(String[] args) {
-        /*Integer[][] matrix = {
-                {6, 1, 2 },
-                {4, 2, 3 },
-                {4, 2, 4 },
-                {5, 3, 4 },
-                {3, 4, 5 },
-                {2, 5, 6 },
-                {10, 6, 1}
-        };*/
         Integer[][] matrix = {
                 {2, 1, 2},
                 {7, 1, 3},
