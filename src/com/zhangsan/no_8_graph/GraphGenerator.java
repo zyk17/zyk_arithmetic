@@ -19,23 +19,7 @@ public class GraphGenerator {
             int weight = integers[0];
             int fromValue = integers[1];
             int toValue = integers[2];
-            if (graph.nodes.containsKey(fromValue)) {
-                graph.nodes.put(fromValue, new Node(fromValue));
-            }
-            if (graph.nodes.containsKey(toValue)) {
-                graph.nodes.put(toValue, new Node(toValue));
-            }
-
-            Node from = graph.nodes.get(fromValue);
-            Node to = graph.nodes.get(toValue);
-            from.nexts.add(to);
-            from.out++;
-            to.in++;
-
-            Edge edge = new Edge(weight, from, to);
-            from.edges.add(edge);
-            graph.edges.add(edge);
-
+            graph.connect(weight, fromValue, toValue);
         }
         return graph;
     }
@@ -51,20 +35,7 @@ public class GraphGenerator {
         Graph graph = new Graph();
         for (int value = 0; value < arr.length; value++) {
             int toValue = arr[value];
-            if (graph.nodes.containsKey(value)) {
-                graph.nodes.put(value, new Node(value));
-            }
-            if (graph.nodes.containsKey(toValue)) {
-                graph.nodes.put(toValue, new Node(toValue));
-            }
-
-
-            Node from = graph.nodes.get(value);
-            Node to = graph.nodes.get(toValue);
-            from.nexts.add(to);
-            from.out++;
-            to.in++;
-
+            graph.connect(0, value, toValue);
         }
         return graph;
     }
