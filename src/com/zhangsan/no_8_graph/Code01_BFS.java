@@ -16,6 +16,9 @@ public class Code01_BFS {
 
     public static void bfs(Graph graph) {
         System.out.println("宽度优先遍历： ");
+        if(graph.head == null) {
+            return;
+        }
         Queue<Node> queue = new LinkedList<>();
         HashSet<Node> set = new HashSet<>();
 
@@ -33,22 +36,6 @@ public class Code01_BFS {
             }
         }
         System.out.println();
-    }
-
-    public static void bfs(Integer[][] matrix) {
-        /* ×
-        HashSet<Integer> set = new HashSet<>();
-        for (Integer[] arr : matrix) {
-            if( !set.contains(arr[1]) ) {
-                set.add(arr[1]);
-                System.out.print(arr[1] + "\t");
-            }
-            if( !set.contains(arr[2]) ) {
-                set.add(arr[2]);
-                System.out.print(arr[2] + "\t");
-            }
-        }
-        System.out.println();*/
     }
 
     public static void main(String[] args) {
