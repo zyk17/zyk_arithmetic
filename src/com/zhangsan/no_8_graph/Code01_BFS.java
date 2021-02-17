@@ -55,7 +55,7 @@ public class Code01_BFS {
                 {6, 2, 3},
                 {8, 3, 4},
                 {10, 2, 5},
-                {1, 6, 3}
+                {1, 3, 6}
         };
         Graph graph = GraphGenerator.create(matrix);
         bfs(graph);
