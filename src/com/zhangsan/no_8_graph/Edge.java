@@ -7,12 +7,12 @@ package com.zhangsan.no_8_graph;
 public class Edge {
 
     public int weight;
-    public Node in;
-    public Node out;
+    public Node from;
+    public Node to;
 
-    public Edge(int weight, Node in, Node out) {
+    public Edge(int weight, Node from, Node to) {
         this.weight = weight;
-        this.in = in;
-        this.out = out;
+        this.from = from;
+        this.to = to;
     }
 }
