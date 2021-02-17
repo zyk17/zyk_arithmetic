@@ -21,7 +21,7 @@ public class Graph {
         if(head == null) {
             head = node;
         }
-        nodes.put(head.value, head);
+        nodes.put(value, node);
         return true;
     }
 
@@ -54,6 +54,15 @@ public class Graph {
         this.edges.add(edge);
     }
 
+    @Override
+    public String toString() {
+        return "Graph{" +
+                "\n\thead=" + head +
+                ", \n\tnodes=" + nodes +
+                ", \n\tedges=" + edges +
+                "\n}";
+    }
+
     public static class Node {
         public int value;
         public int in;
@@ -65,6 +74,14 @@ public class Graph {
             this.value = value;
         }
 
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    ", in=" + in +
+                    ", out=" + out +
+                    '}';
+        }
     }
 
     public static class Edge {
@@ -77,6 +94,15 @@ public class Graph {
             this.weight = weight;
             this.from = from;
             this.to = to;
+        }
+
+        @Override
+        public String toString() {
+            return "Edge{" +
+                    "weight=" + weight +
+                    ", from=" + from.value +
+                    ", to=" + to.value +
+                    '}';
         }
     }
 
