@@ -15,7 +15,7 @@ import java.util.Queue;
 public class Code01_BFS {
 
     public static void bfs(Graph graph) {
-        System.out.println("深度优先遍历： ");
+        System.out.println("宽度优先遍历： ");
         Queue<Node> queue = new LinkedList<>();
         HashSet<Node> set = new HashSet<>();
 
