@@ -6,7 +6,7 @@ import com.zhangsan.util.UnionSet;
 import java.util.*;
 
 /**
- * 岛屿的数量问题
+ *
  * <p>
  * 传入一个二维数组，上下左右 中连在一起的1称之为一个岛屿，共有多少个岛屿
  * <p>
@@ -87,7 +87,7 @@ public class Code03_NumberOfIslands {
         return unionSet.sets();
     }
 
-    /** 做法二：使用数组的并查集。 把所有的1认为是并集，遇到左边或上边为1就合并。 */
+    /** 做法三：使用数组的并查集。 把所有的1认为是并集，遇到左边或上边为1就合并。 */
     public static int numbersOfIslands3(char[][] board) {
         int row = board.length, col = board[0].length;
         Object[][] objects = new Object[row][col];
@@ -129,28 +129,72 @@ public class Code03_NumberOfIslands {
         return unionSet.sets();
     }
 
+    /** 做法四：做法三的升华版。 */
+    public static int numbersOfIslands4(char[][] board) {
+        int row = board.length, col = board[0].length;
+        ArrayUnionSet unionSet = new ArrayUnionSet(row * col);
+        int zeroNumber = board[0][0] == '0'? 1: 0;
+        for (int i = 1; i < row; i++) {
+            // 行遍历。只做第一列。向上
+            if(board[i][0] == '1' && '1' == board[i - 1][0]) {
+                unionSet.union(i * col , (i-1) * col );
+            }
+            if(board[i][0] == '0') {
+                zeroNumber++;
+            }
+        }
+        for (int i = 1; i < col; i++) {
+            // 列遍历。只做第一行。向左
+            if(board[0][i]  == '1' && '1' ==  board[0][i - 1]) {
+                unionSet.union(i, i - 1);
+            }
+            if(board[0][i] == '0') {
+                zeroNumber++;
+            }
+        }
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                if (board[i][j]  == '1' && '1' ==  board[i][j - 1]) {
+//                    unionSet.union(indexMap.get(objects[i][j]), indexMap.get(objects[i][j - 1]));
+                    unionSet.union(i*col+j, i*col + j - 1);
+                }
+                if (board[i][j]  == '1' && '1' ==  board[i - 1][j]) {
+                    unionSet.union(i*col+j, (i-1)*col+j);
+                }
+                if(board[i][j] == '0') {
+                    zeroNumber++;
+                }
+            }
+        }
+        return unionSet.sets()-zeroNumber;
+    }
+
 
     public static void main(String[] args) {
         /*char[][] board = {
-                {'1', '1', '1', '1', '1', '0', '0', '0', '1', '1', '1'},
+                {'0', '1', '1', '1', '1', '0', '0', '0', '1', '1', '1'},
                 {'0', '0', '1', '1', '0', '1', '1', '0', '0', '1', '1'},
                 {'1', '0', '1', '0', '1', '1', '0', '0', '1', '0', '1'},
                 {'1', '0', '1', '0', '1', '1', '1', '0', '1', '1', '0'}
         };
         char[][] board1 = copyBoard(board);
 
-        long s1 = System.currentTimeMillis();
+        long s1 = System.nanoTime();
         System.out.print("结果：" + numbersOfIslands1(board));
-        long e1 = System.currentTimeMillis();
-        System.out.print("\t递归污染方法耗时:" + (e1-s1) + "毫秒\n");
-        long s2 = System.currentTimeMillis();
+        long e1 = System.nanoTime();
+        System.out.print("\t递归污染方法耗时:" + (e1-s1) + "纳秒\n");
+        long s2 = System.nanoTime();
         System.out.print("结果：" + numbersOfIslands2(board1));
-        long e2 = System.currentTimeMillis();
-        System.out.print("\t并查集map结构方法耗时:" + (e2-s2) + "毫秒\n");
-        long s3 = System.currentTimeMillis();
+        long e2 = System.nanoTime();
+        System.out.print("\t并查集map结构方法耗时:" + (e2-s2) + "纳秒\n");
+        long s3 = System.nanoTime();
         System.out.print("结果：" + numbersOfIslands3(board1));
-        long e3 = System.currentTimeMillis();
-        System.out.print("\t并查集数组结构方法耗时:" + (e3-s3) + "毫秒\n");*/
+        long e3 = System.nanoTime();
+        System.out.print("\t并查集数组结构方法耗时:" + (e3-s3) + "纳秒\n");
+        long s4 = System.nanoTime();
+        System.out.print("结果：" + numbersOfIslands4(board1));
+        long e4 = System.nanoTime();
+        System.out.print("\t并查集数组结构优化方法耗时:" + (e4-s4) + "纳秒\n");*/
 
         int times = 10000;
         int row = 1000;
@@ -159,23 +203,27 @@ public class Code03_NumberOfIslands {
             char[][] t1 = generateBoard(row, col);
             char[][] t2 = copyBoard(t1);
             char[][] t3 = copyBoard(t1);
+            char[][] t4 = copyBoard(t1);
 
 
-            long s1 = System.currentTimeMillis();
+            long s1 = System.nanoTime();
             System.out.print("结果：" + numbersOfIslands1(t1));
-            long e1 = System.currentTimeMillis();
-            System.out.print("\t递归污染方法耗时:" + (e1-s1) + "毫秒\n");
-            long s2 = System.currentTimeMillis();
+            long e1 = System.nanoTime();
+            System.out.print("\t递归污染方法耗时:" + (e1-s1) + "纳秒\n");
+            long s2 = System.nanoTime();
             System.out.print("结果：" + numbersOfIslands2(t2));
-            long e2 = System.currentTimeMillis();
-            System.out.print("\t并查集map结构方法耗时:" + (e2-s2) + "毫秒\n");
-            long s3 = System.currentTimeMillis();
+            long e2 = System.nanoTime();
+            System.out.print("\t并查集map结构方法耗时:" + (e2-s2) + "纳秒\n");
+            long s3 = System.nanoTime();
             System.out.print("结果：" + numbersOfIslands3(t3));
-            long e3 = System.currentTimeMillis();
-            System.out.print("\t并查集数组结构方法耗时:" + (e3-s3) + "毫秒\n");
+            long e3 = System.nanoTime();
+            System.out.print("\t并查集数组结构方法耗时:" + (e3-s3) + "纳秒\n");
+            long s4 = System.nanoTime();
+            System.out.print("结果：" + numbersOfIslands4(t4));
+            long e4 = System.nanoTime();
+            System.out.print("\t并查集数组结构优化方法耗时:" + (e4-s4) + "纳秒\n");
             System.out.println("=======================");
         }
-
     }
 
     private static char[][] copyBoard(char[][] board) {
