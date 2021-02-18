@@ -88,7 +88,7 @@ public class Code06_Dijkstra {
         }
     }
 
-    /** 利用加强堆实现 */
+    /** 利用加强堆实现  */
     public static Map<Node, Integer> dijkstra2(Node from) {
         Map<Node, Integer> dijkstraMap = new HashMap<>();
         ToNodeHeap heap = new ToNodeHeap( (o1, o2) -> o2.distance - o1.distance );
