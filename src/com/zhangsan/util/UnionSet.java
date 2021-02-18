@@ -1,9 +1,6 @@
 package com.zhangsan.util;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class UnionSet<V> {
 
@@ -19,13 +16,13 @@ public class UnionSet<V> {
     private Map<Node<V>, Node<V>> parents = new HashMap<>();
     private Map<Node<V>, Integer> sizeMap = new HashMap<>();
 
-    public UnionSet(List<V> list) {
+    public UnionSet(Collection<V> list) {
         init(list);
     }
 
-    private void init(List<V> list) {
+    private void init(Collection<V> set) {
         Node<V> cur = null;
-        for (V v : list) {
+        for (V v : set) {
             cur = new Node<>(v);
             nodes.put(v, cur);
             parents.put(cur, cur);
