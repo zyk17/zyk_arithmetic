@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class HeapGreater<T> {
 
-    private ArrayList<T> heap;
-    private HashMap<T, Integer> indexMap;
-    private int heapSize;
-    private Comparator<T> comp;
+    protected ArrayList<T> heap;
+    protected HashMap<T, Integer> indexMap;
+    protected int heapSize;
+    protected Comparator<T> comp;
 
     public HeapGreater(Comparator<T> comparator) {
         heap = new ArrayList<>();
@@ -73,14 +73,14 @@ public class HeapGreater<T> {
         return new ArrayList<>(heap);
     }
 
-    private void heapInsert(int index) {
+    protected void heapInsert(int index) {
         while (comp.compare(heap.get(index), heap.get(((index - 1) / 2))) > 0) {
             swap(index, ((index - 1) >> 1));
             index = ((index - 1) >> 1);
         }
     }
 
-    private void heapify(int index) {
+    protected void heapify(int index) {
         int left = (index << 1) + 1;
         while (left < heapSize) {
             int largest = left + 1 < heapSize && comp.compare(heap.get(left + 1), heap.get(left)) > 0 ? left + 1 : left;
