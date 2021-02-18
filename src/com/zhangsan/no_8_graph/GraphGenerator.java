@@ -15,6 +15,9 @@ public class GraphGenerator {
      */
     public static Graph create(Integer[][] matrix) {
         Graph graph = new Graph();
+        if(matrix == null || matrix.length == 0) {
+            return graph;
+        }
         for (Integer[] integers : matrix) {
             int weight = integers[0];
             int fromValue = integers[1];
@@ -33,6 +36,9 @@ public class GraphGenerator {
      */
     public static Graph create(Integer[] arr) {
         Graph graph = new Graph();
+        if(arr == null || arr.length == 0) {
+            return graph;
+        }
         for (int value = 0; value < arr.length; value++) {
             int toValue = arr[value];
             graph.connect(0, value, toValue);
