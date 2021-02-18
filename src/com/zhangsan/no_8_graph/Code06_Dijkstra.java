@@ -1,7 +1,9 @@
 package com.zhangsan.no_8_graph;
 
 import com.zhangsan.no_8_graph.Graph.*;
+import com.zhangsan.util.HeapGreater;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -54,6 +56,62 @@ public class Code06_Dijkstra {
         return target;
     }
 
+    public static class ToNodeRecord {
+        Node node;
+        int distance;
+        public ToNodeRecord(Node node, int distance) {
+            this.node = node;
+            this.distance = distance;
+        }
+    }
+
+    /** 利用加强堆实现 */
+    static class ToNodeHeap extends HeapGreater<ToNodeRecord> {
+        public ToNodeHeap(Comparator<ToNodeRecord> comparator) {
+            super(comparator);
+        }
+
+        @Override
+        public void push(ToNodeRecord obj) {
+            for (ToNodeRecord record : heap) {
+                if(record.node == obj.node) {
+                    if( obj.distance < record.distance ) {
+                        record.distance = obj.distance;
+                        resign(record);
+                    }
+                    return;
+                }
+            }
+            heap.add(obj);
+            indexMap.put(obj, heapSize);
+            heapInsert(heapSize++);
+        }
+    }
+
+    /** 利用加强堆实现 */
+    public static Map<Node, Integer> dijkstra2(Node from) {
+        Map<Node, Integer> dijkstraMap = new HashMap<>();
+        ToNodeHeap heap = new ToNodeHeap( (o1, o2) -> o2.distance - o1.distance );
+        heap.push(new ToNodeRecord(from, 0));
+
+        HashSet<Node> popedNodes = new HashSet<>();
+
+        while (heap.size() > 0) {
+            ToNodeRecord record = heap.pop();
+            Node node = record.node;
+            int distance = record.distance;
+
+            popedNodes.add(node);
+            for (Edge edge : node.edges) {
+                Node to = edge.to;
+                if(!popedNodes.contains( to )) {
+                    heap.push( new ToNodeRecord( to, distance+edge.weight ) );
+                }
+            }
+            dijkstraMap.put(node, distance);
+        }
+        return dijkstraMap;
+    }
 
     public static void main(String[] args) {
         Integer[][] martix = {
@@ -67,7 +125,14 @@ public class Code06_Dijkstra {
                 { 10, 4, 5 },
         };
         Graph graph = GraphGenerator.create(martix);
-        System.out.println(dijkstra1(graph.head));
+        long s1 = System.nanoTime();
+        Map<Node, Integer> r1 = dijkstra1(graph.head);
+        long s2 = System.nanoTime();
+        System.out.println( "普通的dijkstra算法 结果:" + r1 + "\n耗时:" + (s2 - s1) + "ns" );
+        long s3 = System.nanoTime();
+        Map<Node, Integer> r2 = dijkstra2(graph.head);
+        long s4 = System.nanoTime();
+        System.out.println( "使用加强堆的dijkstra算法 结果:" + r2 + "\n耗时:" + (s4 - s3) + "ns" );
     }
 
 }
