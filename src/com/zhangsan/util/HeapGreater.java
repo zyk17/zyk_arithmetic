@@ -65,6 +65,10 @@ public class HeapGreater<T> {
         }
     }
 
+    public int size() {
+        return heapSize;
+    }
+
     public List<T> getAllElement() {
         return new ArrayList<>(heap);
     }
