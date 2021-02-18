@@ -33,4 +33,24 @@ public class Code04_Kruskal {
         return result;
     }
 
+    public static void main(String[] args) {
+        Integer[][] matrix = {
+                { 1, 1, 2 },
+                { 3, 1, 6 },
+                { 4, 2, 3 },
+                { 9, 2, 4 },
+                { 6, 2, 5 },
+                { 1, 2, 6 },
+                { 7, 3, 1 },
+                { 10, 4, 3 },
+                { 1, 5, 4 },
+                { 4, 6, 5 },
+        };
+        Graph graph = GraphGenerator.create(matrix);
+        Set<Edge> edges = kruskalMST(graph);
+        for (Edge edge : edges) {
+            System.out.println(edge);
+        }
+    }
+
 }
