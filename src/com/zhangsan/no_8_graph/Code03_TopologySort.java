@@ -12,9 +12,9 @@ import java.util.*;
 public class Code03_TopologySort {
 
     public static List<Node> topologySort(Graph graph) {
-        // key：后序节点， value：忽略掉当前节点它的入度为0就加入
+        // 入度表：key：后序节点， value：忽略掉当前节点它的入度为0就加入
         Map<Node, Integer> inMap = new HashMap<>();
-        // 剩余入度为0加入这个队列
+        // 入度为0的队列：剩余入度为0加入这个队列
         Queue<Node> zeroInQueue = new LinkedList<>();
         List<Node> result = new ArrayList<>();
 
