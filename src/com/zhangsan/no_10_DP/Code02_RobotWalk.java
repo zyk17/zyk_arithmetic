@@ -19,6 +19,7 @@ import java.util.Arrays;
  */
 public class Code02_RobotWalk {
 
+    /** 暴力尝试 */
     public static int ways1( int n, int start, int aim, int k ) {
         /*if( n < 2 || k < 1 || aim < 1 || aim > n || start < 1 || start > n  ) {
             return 0;
@@ -47,6 +48,7 @@ public class Code02_RobotWalk {
         }
     }
 
+    /** 参数优化，加入二维数组缓存 */
     public static int ways2( int n, int start, int aim, int k ) {
         int[][] dp = new int[n+1][k+1]; // 多少个路*多少个选择的大小
         for (int[] ints : dp) {
@@ -81,21 +83,48 @@ public class Code02_RobotWalk {
         return ans;
     }
 
+    /** 反推二位数组的赋值方法，发现其实就是杨辉三角形 */
+    public static int ways3( int n, int start, int aim, int k ) {
+        int[][] dp = new int[n+1][k+1]; // 多少个路*多少个选择的大小
+        dp[aim][0] = 1;
+        for (int col = 1; col <= k; col++) {
+            int row = 1;
+            while (row <= n) {
+                if (row == 1) {
+                    dp[row][col] = dp[row + 1][col - 1];
+                } else if (row == n) {
+                    dp[row][col] = dp[row - 1][col - 1];
+                } else {
+                    dp[row][col] = dp[row - 1][col - 1] + dp[row + 1][col - 1];
+                }
+                row++;
+            }
+        }
+
+        for (int[] ints : dp) {
+            System.out.println(Arrays.toString(ints));
+        }
+
+        return dp[start][k];
+    }
 
     public static void main(String[] args) {
-        int n = 100;
-        int start = 2;
+        int n = 5;
+        int start = 4;
         int aim = 4;
-        int k = 20;
+        int k = 6;
 
         long s1 = System.nanoTime();
         int r1 = ways1(n , start, aim, k);
         long s2 = System.nanoTime();
         int r2 = ways2(n , start, aim, k);
         long s3 = System.nanoTime();
+        int r3 = ways3(n , start, aim, k);
+        long s4 = System.nanoTime();
 
         System.out.println("暴力解答案: " + r1 + ",耗时：" + (s2 - s1));
         System.out.println("动态规划: " + r2 + ",耗时：" + (s3 - s2));
+        System.out.println("反推: " + r3 + ",耗时：" + (s4 - s3));
 
     }
 
