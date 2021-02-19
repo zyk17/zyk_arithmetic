@@ -10,21 +10,22 @@ import java.util.Stack;
  */
 public class Code04_ReverseStackByRecursive {
 
-    public static void reverseStackByRecursive(Stack<Integer> stack) {
+    public static void reverseStack(Stack<Integer> stack) {
         if(stack == null || stack.isEmpty()) {
             return;
         }
-        int i = reverse(stack);
-        reverseStackByRecursive(stack);
+        int i = getBottomStack(stack);
+        System.out.println(i);
+        reverseStack(stack);
         stack.add(i);
     }
 
-    private static int reverse(Stack<Integer> stack) {
+    private static int getBottomStack(Stack<Integer> stack) {
         Integer pop = stack.pop();
         if(stack.isEmpty()) {
             return pop;
         }
-        int last = reverse(stack);
+        int last = getBottomStack(stack);
         stack.add(pop);
         return last;
     }
@@ -41,7 +42,7 @@ public class Code04_ReverseStackByRecursive {
         System.out.println();*/
         System.out.println(stack);
 
-        reverseStackByRecursive(stack);
+        reverseStack(stack);
 
         System.out.println(stack);
         /*while (!stack.isEmpty()) {
