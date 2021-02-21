@@ -88,22 +88,17 @@ public class Code02_RobotWalk {
         int[][] dp = new int[n+1][k+1]; // 多少个路*多少个选择的大小
         dp[aim][0] = 1;
         for (int col = 1; col <= k; col++) {
-            int row = 1;
-            while (row <= n) {
-                if (row == 1) {
-                    dp[row][col] = dp[row + 1][col - 1];
-                } else if (row == n) {
-                    dp[row][col] = dp[row - 1][col - 1];
-                } else {
-                    dp[row][col] = dp[row - 1][col - 1] + dp[row + 1][col - 1];
-                }
-                row++;
+
+            dp[0][col] = dp[1 ][col - 1];
+            for (int row = 1; row < n; row++) {
+                dp[row][col] = dp[row - 1][col - 1] + dp[row + 1][col - 1];
             }
+            dp[n][col] = dp[n-1][col - 1];
         }
 
-        for (int[] ints : dp) {
+        /*for (int[] ints : dp) {
             System.out.println(Arrays.toString(ints));
-        }
+        }*/
 
         return dp[start][k];
     }
@@ -112,7 +107,7 @@ public class Code02_RobotWalk {
         int n = 5;
         int start = 4;
         int aim = 4;
-        int k = 6;
+        int k = 4;
 
         long s1 = System.nanoTime();
         int r1 = ways1(n , start, aim, k);
