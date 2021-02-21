@@ -22,6 +22,13 @@ public class ArrayUtil {
         }
         return arr;
     }
+    public static int[] generateRandomArray(int maxSize, int maxValue, boolean hasMinus) {
+        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = hasMinus? (int)((maxValue + 1) * Math.random() - maxValue * Math.random()) : (int)((maxValue) * Math.random());
+        }
+        return arr;
+    }
 
     public static String[] generateRandomStringArray(int maxSize, int maxStringLength) {
         String[] arr = new String[(int) ((maxSize + 1) * Math.random())];
