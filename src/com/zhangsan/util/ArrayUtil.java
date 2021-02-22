@@ -22,8 +22,9 @@ public class ArrayUtil {
         }
         return arr;
     }
-    public static int[] generateRandomArray(int maxSize, int maxValue, boolean hasMinus) {
-        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+    public static int[] generateRandomArray(int maxSize, int maxValue, boolean hasMinus, boolean fixedSize) {
+        maxSize = fixedSize? maxSize : (int) ((maxSize + 1) * Math.random());
+        int[] arr = new int[maxSize];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = hasMinus? (int)((maxValue + 1) * Math.random() - maxValue * Math.random()) : (int)((maxValue) * Math.random());
         }
