@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author zhangsan
  * @date 2021/2/23 16:20
  */
-public class Code06_LongestCommonSubsequence {
+public class Code07_LongestCommonSubsequence {
 
     /** 暴力解 */
     public static int longestCommonSubsequence1(String text1, String text2) {
