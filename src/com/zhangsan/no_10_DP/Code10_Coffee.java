@@ -1,8 +1,5 @@
 package com.zhangsan.no_10_DP;
 
-import com.zhangsan.util.ArrayUtil;
-
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -147,32 +144,8 @@ public class Code10_Coffee {
         return ans;
     }
 
-    /** 测试 */
-    public static void test() {
-        int[] ans = {1, 3, 5, 6, 8};
-        int[][] dp = new int[5][ 10 ];
-
-        System.out.println("\n\n不洗杯子每个人最快喝完时间点 ");
-        ArrayUtil.printArr(ans);
-        int result = bestTime2(ans, 2, 5, 0, 0, dp);
-        System.out.println("二位缓存表内容: ");
-        for (int[] cache : dp) {
-            ArrayUtil.printArr(cache);
-        }
-        System.out.println("测试结果" + result);
-    }
-
-    public static class MachineComparator implements Comparator<Machine> {
-
-        @Override
-        public int compare(Machine o1, Machine o2) {
-            return (o1.timePoint + o1.workTime) - (o2.timePoint + o2.workTime);
-        }
-
-    }
-
     public static int minTimes3(int[] arr, int n, int a, int b) {
-        PriorityQueue<Machine> heap = new PriorityQueue<Machine>(new MachineComparator());
+        PriorityQueue<Machine> heap = new PriorityQueue<Machine>();
         for (int i = 0; i < arr.length; i++) {
             heap.add(new Machine(0, arr[i]));
         }
@@ -238,7 +211,6 @@ public class Code10_Coffee {
         System.out.println("加入傻缓存, 结果： " + r2 + ", 共耗时: " + (s3 - s2));
         System.out.println("动态规划 结果： " + r3 + ", 共耗时: " + (s4 - s3));
 
-//        test();
     }
 
 }
