@@ -1,9 +1,6 @@
 package com.zhangsan.no_8_graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * 图结构
@@ -17,6 +14,9 @@ public class Graph {
     public HashSet<Edge> edges = new HashSet<>();
 
     public boolean add(int value) {
+        if( nodes.containsKey(value) ) {
+            return false;
+        }
         Node node = new Node(value);
         if(head == null) {
             head = node;
@@ -44,13 +44,15 @@ public class Graph {
     }
 
     private void connectProcess(Node from, Node to, int weight) {
+        Edge edge = new Edge(weight, from, to);
+        if (this.edges.contains( edge )) {
+            return;
+        }
         from.nexts.add(to);
         from.out++;
         to.in++;
 
-        Edge edge = new Edge(weight, from, to);
         from.edges.add(edge);
-        edges.add(edge);
         this.edges.add(edge);
     }
 
@@ -103,6 +105,21 @@ public class Graph {
                     ", from=" + from.value +
                     ", to=" + to.value +
                     '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Edge edge = (Edge) o;
+            return weight == edge.weight &&
+                    Objects.equals(from, edge.from) &&
+                    Objects.equals(to, edge.to);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(weight, from, to);
         }
     }
 
