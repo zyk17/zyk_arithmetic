@@ -7,6 +7,7 @@ package com.zhangsan.sleetcode;
  */
 public class LeetCode50 {
 
+    /** 递归, 时间复杂度 O(N) 空间复杂度 O(1) */
     public static double myPow(double x, int n) {
         long n1 = n;
         if(n < 0) { n1 = ~n1 + 1; x = 1/ x; }
@@ -18,10 +19,12 @@ public class LeetCode50 {
         return ans;
     }
 
+    /** 比对方法 */
     public static double myPow2(double x, int n) {
         return Math.pow(x, n);
     }
 
+    /** 二分优化 x的4次方 == x的2次方 * x的二次方 */
     public static double myPow3(double x, int n) {
         if(n == 0 || x == 1) { return 1; }
         long n1 = n;
@@ -47,7 +50,7 @@ public class LeetCode50 {
         double x = 2.0;
         int n = Integer.MIN_VALUE;
 
-//        System.out.println(myPow(x, n));
+        System.out.println(myPow(x, n));
         System.out.println(myPow2(x, n));
         System.out.println(myPow3(x, n));
     }
