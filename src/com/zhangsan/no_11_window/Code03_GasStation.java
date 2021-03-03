@@ -10,7 +10,7 @@ package com.zhangsan.no_11_window;
  * @author zhangsan
  * @date 2021/3/3 11:44
  */
-public class Code03_ {
+public class Code03_GasStation {
 
     // 暴力解
     public static boolean[] right(int[] gas, int[] cost) {
