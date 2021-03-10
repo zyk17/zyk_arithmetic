@@ -1,8 +1,6 @@
 package com.zhangsan.no_12_monotonousStack;
 
-import com.zhangsan.util.ArrayUtil;
-
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 求一个数组所有子数组最小值的累加和
@@ -52,14 +50,63 @@ public class Code06_SumOfSubArrayMinimums {
 
     // for test
     public static void main(String[] args) {
-        int[] arr = ArrayUtil.generateRandomArray(100000, 1000, false, false);
+        /*int[] arr = ArrayUtil.generateRandomArray(50000, 1000, false, false);
         long s1 = System.nanoTime();
         int r1 = f(arr);
         long s2 = System.nanoTime();
         int r2 = compareF(arr);
         long s3 = System.nanoTime();
         System.out.println(r1 + ", 耗时: " + (s2-s1));
-        System.out.println(r2 + ", 耗时: " + (s3-s2));
+        System.out.println(r2 + ", 耗时: " + (s3-s2));*/
+
+        int n = 10000000;
+
+        long s1 = System.nanoTime();
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            stack.push(i);
+        }
+        for (int i = 0; i < n; i++) {
+            stack.pollFirst();
+        }
+        long s2 = System.nanoTime();
+
+        long s3 = System.nanoTime();
+        Stack<Integer> stack2 = new Stack<>();
+        for (int i = 0; i < n; i++) {
+            stack2.push(i);
+        }
+        for (int i = 0; i < n; i++) {
+            stack2.pop();
+        }
+        long s4 = System.nanoTime();
+        System.out.println("ArrayDeque实现栈:" + (s2-s1));
+        System.out.println("Stack实现栈:" + (s4-s3));
+
+
+
+        long s5 = System.nanoTime();
+        Deque<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            queue.push(i);
+        }
+        for (int i = 0; i < n; i++) {
+            queue.pop();
+        }
+        long s6 = System.nanoTime();
+
+        long s7 = System.nanoTime();
+        Deque<Integer> queue2 = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            queue2.push(i);
+        }
+        for (int i = 0; i < n; i++) {
+            queue2.pop();
+        }
+        long s8 = System.nanoTime();
+        System.out.println("ArrayDeque实现队列:" + (s6-s5));
+        System.out.println("LinkedList实现栈:" + (s8-s7));
+
     }
 
 }
