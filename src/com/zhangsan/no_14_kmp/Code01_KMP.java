@@ -70,6 +70,7 @@ public class Code01_KMP {
 
     // for test
     public static void main(String[] args) {
+
         String s1 = "aaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaab";
         String s2 = "aaab";
         // 7
