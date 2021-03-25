@@ -215,7 +215,7 @@ public class Code01_AVLTreeMap {
                 return;
             }
             if(containsKey(key)) {
-                size++;
+                size--;
                 this.root = delete(root, key);
             }
         }
@@ -289,6 +289,33 @@ public class Code01_AVLTreeMap {
             }
         }
 
+    }
+
+    public static void main(String[] args) {
+        SortedMap<Integer, String> sortedMap = new AVLTree<>();
+        sortedMap.put(1, "我是1.");
+        sortedMap.put(1, "我是1.0.");
+        sortedMap.put(2, "我是2.");
+        sortedMap.put(3, "我是3.");
+
+        System.out.println("当前大小:" + sortedMap.size());
+        System.out.println(sortedMap.get(1));
+        System.out.println(sortedMap.get(2));
+        System.out.println(sortedMap.get(4));
+        sortedMap.remove(2);
+        System.out.println("当前大小:" + sortedMap.size());
+        sortedMap.remove(5);
+        System.out.println(sortedMap.get(4));
+
+        sortedMap.put(4, "我是4.");
+        sortedMap.put(5, "我是5.");
+        sortedMap.put(6, "我是6.");
+        sortedMap.put(7, "我是7.");
+        System.out.println(sortedMap.get(7));
+        System.out.println("当前大小:" + sortedMap.size());
+        System.out.println(sortedMap.firstKey());
+        System.out.println(sortedMap.lastKey());
+        System.out.println(sortedMap.floorKey(2));
     }
 
 }
