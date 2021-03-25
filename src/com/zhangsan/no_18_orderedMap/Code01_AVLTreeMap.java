@@ -1,26 +1,13 @@
 package com.zhangsan.no_18_orderedMap;
 
 /**
+ * 平衡搜索二叉树
  * @author zhangsan
  * @date 2021/3/25 17:34
  */
 public class Code01_AVLTreeMap {
 
-    public static class AVLNode<K extends Comparable<K>, V> {
-        public K k;
-        public V v;
-        public AVLNode<K, V> l;
-        public AVLNode<K, V> r;
-        public int h;
-
-        public AVLNode(K k, V v) {
-            this.k = k;
-            this.v = v;
-            this.h = 1;
-        }
-    }
-
-    public static class AVLTree<K extends Comparable<K>, V> {
+    public static class AVLTree<K extends Comparable<K>, V> implements SortedMap<K, V> {
         private AVLNode<K, V> root;
         private int size;
 
@@ -142,6 +129,164 @@ public class Code01_AVLTreeMap {
                 }
             }
             return cur;
+        }
+
+        private AVLNode<K, V> findLastIndex(K key) {
+            AVLNode<K, V> cur = root;
+            AVLNode<K, V> pre = null;
+            while (cur != null) {
+                pre = cur;
+                if(key.compareTo(cur.k) == 0) {
+                    break;
+                }else if(key.compareTo(cur.k) < 0) {
+                    cur = cur.l;
+                }else {
+                    cur = cur.r;
+                }
+            }
+            return pre;
+        }
+
+        private AVLNode<K, V> findLastNoSmallIndex(K key) {
+            AVLNode<K, V> cur = root;
+            AVLNode<K, V> ans = null;
+            while (cur != null) {
+                if(key.compareTo(cur.k) == 0) {
+                    ans = cur;
+                    break;
+                }else if(key.compareTo(cur.k) < 0) {
+                    ans = cur;
+                    cur = cur.l;
+                }else {
+                    cur = cur.r;
+                }
+            }
+            return ans;
+        }
+
+        private AVLNode<K, V> findLastNoBigIndex(K key) {
+            AVLNode<K, V> cur = root;
+            AVLNode<K, V> ans = null;
+            while (cur != null) {
+                if(key.compareTo(cur.k) == 0) {
+                    ans = cur;
+                    break;
+                }else if(key.compareTo(cur.k) < 0) {
+                    cur = cur.l;
+                }else {
+                    ans = cur;
+                    cur = cur.r;
+                }
+            }
+            return ans;
+        }
+
+        @Override
+        public int size() {
+            return this.size;
+        }
+
+        @Override
+        public boolean containsKey(K key) {
+            if (key == null) {
+                return false;
+            }
+            AVLNode<K, V> lastNode = findLastIndex(key);
+            return lastNode != null && lastNode.k.compareTo(key) == 0;
+        }
+
+        @Override
+        public void put(K key, V value) {
+            if( key == null ) {
+                return;
+            }
+            AVLNode<K, V> lastNode = findLastIndex(key);
+            if( lastNode != null && lastNode.k.compareTo(key) == 0 ) {
+                lastNode.v = value;
+            }else {
+                size++;
+                this.root = add(this.root, key, value);
+            }
+        }
+
+        @Override
+        public void remove(K key) {
+            if(key == null) {
+                return;
+            }
+            if(containsKey(key)) {
+                size++;
+                this.root = delete(root, key);
+            }
+        }
+
+        @Override
+        public V get(K key) {
+            if (key == null) {
+                return null;
+            }
+            AVLNode<K, V> lastNode = findLastIndex(key);
+            if (lastNode != null && key.compareTo(lastNode.k) == 0) {
+                return lastNode.v;
+            }
+            return null;
+        }
+
+        @Override
+        public K firstKey() {
+            if (root == null) {
+                return null;
+            }
+            AVLNode<K, V> cur = this.root;
+            while (cur.l != null) {
+                cur = cur.l;
+            }
+            return cur.k;
+        }
+
+        @Override
+        public K lastKey() {
+            if (root == null) {
+                return null;
+            }
+            AVLNode<K, V> cur = this.root;
+            while (cur.r != null) {
+                cur = cur.r;
+            }
+            return cur.k;
+        }
+
+        @Override
+        public K floorKey(K key) {
+            if (key == null) {
+                return null;
+            }
+            AVLNode<K, V> lastNoBigNode = findLastNoBigIndex(key);
+            return lastNoBigNode == null ? null : lastNoBigNode.k;
+        }
+
+        @Override
+        public K ceilingKey(K key) {
+            if (key == null) {
+                return null;
+            }
+            AVLNode<K, V> lastNoSmallNode = findLastNoSmallIndex(key);
+            return lastNoSmallNode == null ? null : lastNoSmallNode.k;
+        }
+
+
+        private static class AVLNode<K extends Comparable<K>, V> {
+            public K k;
+            public V v;
+            public AVLNode<K, V> l;
+            public AVLNode<K, V> r;
+            public int h;
+
+            public AVLNode(K k, V v) {
+                this.k = k;
+                this.v = v;
+                this.h = 1;
+            }
         }
 
     }
