@@ -10,7 +10,7 @@ public class Test2 {
 
     public static void main(String[] args) {
 
-        int N = (int) Math.pow(2, 10)+10;
+        int N = (int) Math.pow(2, 20)+10;
 //        int N = 32;
         // 找到0-N-1 的数组中为出现的数字们
         int[] nums = new int[N];
@@ -33,7 +33,10 @@ public class Test2 {
                 int index = num / 32;
                 // 在bitmap中int的第i位, 由小到大,从右往左填的
                 int i = num % 32;
-                int v = (int) Math.pow(2, i) == Integer.MAX_VALUE? Integer.MIN_VALUE: (int) Math.pow(2, i);
+                int v = (int) Math.pow(2, i);
+                if(v == Integer.MAX_VALUE) {
+                    v = Integer.MIN_VALUE;
+                }
                 bitmap[index] |= v;
             }
         }
