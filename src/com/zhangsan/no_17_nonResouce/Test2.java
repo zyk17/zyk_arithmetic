@@ -10,7 +10,7 @@ public class Test2 {
 
     public static void main(String[] args) {
 
-        int N = 320;
+        int N = (int) Math.pow(2, 10)+10;
 //        int N = 32;
         // 找到0-N-1 的数组中为出现的数字们
         int[] nums = new int[N];
@@ -44,10 +44,14 @@ public class Test2 {
         int num = 0;
         for (int i = 0; i < bitmap.length; i++) {
             for (int j = 0; j < 32; j++) {
-                System.out.print(num + " : " + ( ((bitmap[i] & (1 << j)) == 0) ? "未出现" : "出现了") + "\t" );
-                num++;
-                if(num % 5 == 0) {
-                    System.out.println();
+                if(num <= N) {
+                    System.out.print(num + " : " + (((bitmap[i] & (1 << j)) == 0) ? "未出现" : "出现了") + "\t");
+                    num++;
+                    if (num % 5 == 0) {
+                        System.out.println();
+                    }
+                }else {
+                    break;
                 }
             }
         }
