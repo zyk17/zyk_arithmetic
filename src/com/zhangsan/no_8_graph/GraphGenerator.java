@@ -26,6 +26,19 @@ public class GraphGenerator {
         }
         return graph;
     }
+    public static Graph create(int[][] matrix) {
+        Graph graph = new Graph();
+        if(matrix == null || matrix.length == 0) {
+            return graph;
+        }
+        for (int[] integers : matrix) {
+            int weight = integers[2];
+            int fromValue = integers[0];
+            int toValue = integers[1];
+            graph.connect(weight, fromValue, toValue);
+        }
+        return graph;
+    }
 
     /**
      * 一维数组代表图
