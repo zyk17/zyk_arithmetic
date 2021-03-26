@@ -29,7 +29,7 @@ public class Code01_AVLTreeMap {
             cur.r = right.l;
             right.l = cur;
             cur.h = Math.max(cur.l == null ? 0 : cur.l.h, cur.r == null ? 0 : cur.r.h) + 1;
-            right.h = Math.max(right.l.h, right.r.h) + 1;
+            right.h = Math.max(right.l.h, right.r==null?0: right.r.h) + 1;
             return right;
         }
 
