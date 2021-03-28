@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 /**
  * list
- * add(), remove, index方法, 比ArrayList, LinkedList时间复杂度好O(logN)
+ * add(), remove, get方法 时间复杂度好O(logN)
+ * ArrayList, 新增删除O(N) 扩容操作,删除赋值操作, 读取O(1), 下标直接读取
+ * LinkedList 新增删除O(N) 需要走到那个节点, 读取也一样
  */
 public class Code06_AddRemoveGetIndexGreat {
 
