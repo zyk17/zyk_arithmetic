@@ -22,10 +22,10 @@ public class ReservoirSampling {
         System.out.println("准备测试:");
         System.out.println("====================================");
         int times = 100000;
-        int nums = 1729;
+        int nums = 1729;    // 用户数
         int[] count = new int[nums];
         for (int i = 0; i < times; i++) {
-            int[] bag = new int[]{1, 2, 3, 4, 5, 6, 7 ,8 ,9 ,10};
+            int[] bag = new int[]{1, 2, 3, 4, 5, 6, 7 ,8 ,9 ,10};   // 10个桶
             int bagI = 0;
             // 1729个球随机入袋
             for (int num = 11; num < nums; num++) {
