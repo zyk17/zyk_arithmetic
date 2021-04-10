@@ -1,14 +1,12 @@
-package com.zhangsan.no_other;
+package com.zhangsan.util;
 
 /**
- * 线段树
- *
+ * 线段树结构, 用于, 区间的增减, 区间范围的修改, 区间范围的查询
+ * 时间复杂度 O(logN)
  * @author zhangsan
- * @date 2021/3/19 14:04
+ * @date 2021/4/10 15:39
  */
-public class Code02_SegmentTree {
-
-    public static class SegmentTree {
+public class SegmentTree {
 
         private int N;          // 数组的长度
         private int[] arr;      // 原始传入的数组, 只不过下标从1开始
@@ -164,24 +162,3 @@ public class Code02_SegmentTree {
         }
 
     }
-
-
-    public static void main(String[] args) {
-        int[] nums = new int[500];
-        SegmentTree tree = new SegmentTree(nums);
-
-
-        tree.build(1, nums.length, 1);
-        tree.add(1, 500, 7, 1, 500, 1);
-        System.out.println(tree.query(1, 500, 1, 500, 1));
-        System.out.println(tree.query(1, 200, 1, 500, 1));
-
-        tree.add(1, 500, 3, 1, 500, 1);
-        System.out.println(tree.query(1, 500, 1, 500, 1));
-        System.out.println(tree.query(1, 200, 1, 500, 1));
-
-        tree.update(1, 500, 1, 1, 500, 1);
-        System.out.println(tree.query(1, 500, 1, 500, 1));
-        System.out.println(tree.query(1, 200, 1, 500, 1));
-    }
-}
