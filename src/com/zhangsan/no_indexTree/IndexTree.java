@@ -1,4 +1,4 @@
-package com.zhangsan.no_other;
+package com.zhangsan.no_indexTree;
 
 /**
  * index tree 结构

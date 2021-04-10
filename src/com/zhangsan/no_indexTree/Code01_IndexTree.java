@@ -1,4 +1,4 @@
-package com.zhangsan.no_other;
+package com.zhangsan.no_indexTree;
 
 /**
  * @author zhangsan
@@ -62,7 +62,7 @@ public class Code01_IndexTree {
 
     public static void main(String[] args) {
         int size = 8;
-        com.zhangsan.no_other.IndexTree indexTree = new com.zhangsan.no_other.IndexTree(size);
+        com.zhangsan.no_indexTree.IndexTree indexTree = new com.zhangsan.no_indexTree.IndexTree(size);
         TestIndexTree.Right right = new TestIndexTree.Right(size);
 
 
