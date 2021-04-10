@@ -1,4 +1,4 @@
-package com.zhangsan.no_other;
+package com.zhangsan.no_bfprt;
 
 import com.zhangsan.util.ArrayUtil;
 
