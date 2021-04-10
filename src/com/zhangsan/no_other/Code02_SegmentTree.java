@@ -225,7 +225,7 @@ public class Code02_SegmentTree {
     public static boolean test() {
         int len = 100;
         int max = 1000;
-        int testTimes = 200;
+        int testTimes = 1000;
         int addOrUpdateTimes = 1000;
         int queryTimes = 500;
         for (int i = 0; i < testTimes; i++) {
