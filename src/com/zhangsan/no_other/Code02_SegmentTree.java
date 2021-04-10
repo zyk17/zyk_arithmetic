@@ -1,5 +1,7 @@
 package com.zhangsan.no_other;
 
+import com.zhangsan.util.ArrayUtil;
+
 /**
  * 线段树
  *
@@ -8,6 +10,7 @@ package com.zhangsan.no_other;
  */
 public class Code02_SegmentTree {
 
+    /** 线段树结构 */
     public static class SegmentTree {
 
         private int N;          // 数组的长度
@@ -27,7 +30,7 @@ public class Code02_SegmentTree {
             this.change = new int[N << 2];
             this.update = new boolean[N << 2];
 
-            build(1, 500, 1);
+            build(1, N-1, 1);
         }
 
         /**
@@ -165,23 +168,97 @@ public class Code02_SegmentTree {
 
     }
 
+    /** 对数器 */
+    public static class Right {
+        private int[] arr;
+        public Right(int[] origin) {
+            arr = new int[origin.length + 1];
+            System.arraycopy(origin, 0, arr, 1, origin.length);
+        }
+
+        public void update(int L, int R, int V) {
+            while (L <= R) arr[L++] = V;
+        }
+
+        public void add(int L, int R, int V) {
+            while (L <= R) arr[L++] += V;
+        }
+
+        public long query(int L, int R) {
+            long ans = 0;
+            while (L <= R) ans += arr[L++];
+            return ans;
+        }
+    }
 
     public static void main(String[] args) {
-        int[] nums = new int[500];
-        SegmentTree tree = new SegmentTree(nums);
+        int[] origin = ArrayUtil.generateRandomArray(1000, 10000, false, true);
+        SegmentTree seg = new SegmentTree(origin);
+        int S = 1; // 整个区间的开始位置，规定从1开始，不从0开始 -> 固定
+        int N = origin.length; // 整个区间的结束位置，规定能到N，不是N-1 -> 固定
+        int root = 1; // 整棵树的头节点位置，规定是1，不是0 -> 固定
+        int L = 3; // 操作区间的开始位置 -> 可变
+        int R = 621; // 操作区间的结束位置 -> 可变
+        int C = 4; // 要加的数字或者要更新的数字 -> 可变
+        // 区间生成，必须在[S,N]整个范围上build
+        // 区间修改，可以改变L、R和C的值，其他值不可改变
+        seg.add(L, R, C);
+        // 区间更新，可以改变L、R和C的值，其他值不可改变
+        seg.update(L, R, C);
+        // 区间查询，可以改变L和R的值，其他值不可改变
+        long sum = seg.query(L, R, S, N, root);
+        System.out.println(sum);
 
+        System.out.println("对数器测试开始...");
+        System.out.println("测试结果 : " + (test() ? "通过" : "未通过"));
+    }
 
-        tree.build(1, nums.length, 1);
-        tree.add(1, 500, 7, 1, 500, 1);
-        System.out.println(tree.query(1, 500, 1, 500, 1));
-        System.out.println(tree.query(1, 200, 1, 500, 1));
+    public static int[] genarateRandomArray(int len, int max) {
+        int size = (int) (Math.random() * len) + 1;
+        int[] origin = new int[size];
+        for (int i = 0; i < size; i++) {
+            origin[i] = (int) (Math.random() * max) - (int) (Math.random() * max);
+        }
+        return origin;
+    }
 
-        tree.add(1, 500, 3, 1, 500, 1);
-        System.out.println(tree.query(1, 500, 1, 500, 1));
-        System.out.println(tree.query(1, 200, 1, 500, 1));
-
-        tree.update(1, 500, 1, 1, 500, 1);
-        System.out.println(tree.query(1, 500, 1, 500, 1));
-        System.out.println(tree.query(1, 200, 1, 500, 1));
+    public static boolean test() {
+        int len = 100;
+        int max = 1000;
+        int testTimes = 200;
+        int addOrUpdateTimes = 1000;
+        int queryTimes = 500;
+        for (int i = 0; i < testTimes; i++) {
+            int[] origin = genarateRandomArray(len, max);
+            SegmentTree seg = new SegmentTree(origin);
+            int N = origin.length;
+            Right rig = new Right(origin);
+            for (int j = 0; j < addOrUpdateTimes; j++) {
+                int num1 = (int) (Math.random() * N) + 1;
+                int num2 = (int) (Math.random() * N) + 1;
+                int L = Math.min(num1, num2);
+                int R = Math.max(num1, num2);
+                int C = (int) (Math.random() * max) - (int) (Math.random() * max);
+                if (Math.random() < 0.5) {
+                    seg.add(L, R, C);
+                    rig.add(L, R, C);
+                } else {
+                    seg.update(L, R, C);
+                    rig.update(L, R, C);
+                }
+            }
+            for (int k = 0; k < queryTimes; k++) {
+                int num1 = (int) (Math.random() * N) + 1;
+                int num2 = (int) (Math.random() * N) + 1;
+                int L = Math.min(num1, num2);
+                int R = Math.max(num1, num2);
+                long ans1 = seg.query(L, R);
+                long ans2 = rig.query(L, R);
+                if (ans1 != ans2) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
