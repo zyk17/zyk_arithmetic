@@ -1,6 +1,6 @@
 package com.zhangsan.no_other;
 
-import com.zhangsan.util.ArrayUtil;
+import java.util.Arrays;
 
 /**
  * 线段树
@@ -192,7 +192,7 @@ public class Code02_SegmentTree {
     }
 
     public static void main(String[] args) {
-        int[] origin = ArrayUtil.generateRandomArray(1000, 10000, false, true);
+        /*int[] origin = ArrayUtil.generateRandomArray(1000, 10000, false, true);
         SegmentTree seg = new SegmentTree(origin);
         int S = 1; // 整个区间的开始位置，规定从1开始，不从0开始 -> 固定
         int N = origin.length; // 整个区间的结束位置，规定能到N，不是N-1 -> 固定
@@ -207,14 +207,55 @@ public class Code02_SegmentTree {
         seg.update(L, R, C);
         // 区间查询，可以改变L和R的值，其他值不可改变
         long sum = seg.query(L, R, S, N, root);
-        System.out.println(sum);
+        System.out.println(sum);*/
 
-        System.out.println("对数器测试开始...");
+        System.out.println("对数器功能测试开始...");
         System.out.println("测试结果 : " + (test() ? "通过" : "未通过"));
+
+        // 性能测试
+        System.out.println("对数器性能测试开始...");
+        for (int i = 10; i <= 100000000; i *= 10) {
+            System.out.println("===============size:"+ i +"=================");
+            int[] array = genarateRandomArray(i, 1000, true);
+            int[] array1 = Arrays.copyOf(array, array.length);
+            int addOrUpdateTimes = i*2;
+            int queryTimes = i;
+
+            long s1 = System.currentTimeMillis();
+            SegmentTree tree = new SegmentTree(array);
+            for (int j = 0; j < addOrUpdateTimes; j++) {
+                if (Math.random() < 0.5) {
+                    tree.add(1, i, 5);
+                } else {
+                    tree.update(1, i, 5);
+                }
+            }
+            for (int j = 0; j < queryTimes; j++) {
+                tree.query(1, i);
+            }
+            long s2 = System.currentTimeMillis();
+            System.out.println("线段树O(logN): " + (s2-s1));
+            long s3 = System.currentTimeMillis();
+            Right right = new Right(array1);
+            for (int j = 0; j < addOrUpdateTimes; j++) {
+                if (Math.random() < 0.5) {
+                    right.add(1, i, 5);
+                } else {
+                    right.update(1, i, 5);
+                }
+            }
+            for (int j = 0; j < queryTimes; j++) {
+                right.query(1, i);
+            }
+            long s4 = System.currentTimeMillis();
+            System.out.println("暴力O(N): " + (s4-s3));
+            System.out.println("================================");
+        }
+
     }
 
-    public static int[] genarateRandomArray(int len, int max) {
-        int size = (int) (Math.random() * len) + 1;
+    public static int[] genarateRandomArray(int len, int max, boolean fixedSize) {
+        int size = fixedSize? len: (int) (Math.random() * len) + 1;
         int[] origin = new int[size];
         for (int i = 0; i < size; i++) {
             origin[i] = (int) (Math.random() * max) - (int) (Math.random() * max);
@@ -229,7 +270,7 @@ public class Code02_SegmentTree {
         int addOrUpdateTimes = 1000;
         int queryTimes = 500;
         for (int i = 0; i < testTimes; i++) {
-            int[] origin = genarateRandomArray(len, max);
+            int[] origin = genarateRandomArray(len, max, false);
             SegmentTree seg = new SegmentTree(origin);
             int N = origin.length;
             Right rig = new Right(origin);
