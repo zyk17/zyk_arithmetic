@@ -1,4 +1,4 @@
-package com.zhangsan.no_other;
+package com.zhangsan.no_segmentTree;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author zhangsan
  * @date 2021/3/19 14:04
  */
-public class Code02_SegmentTree {
+public class Code01_SegmentTree {
 
     /** 线段树结构 */
     public static class SegmentTree {
