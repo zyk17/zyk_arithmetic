@@ -143,7 +143,8 @@ public class TopKNums {
             int[] nums3 = ArrayUtil.copyArr(nums);
             int[] nums4 = ArrayUtil.copyArr(nums);
 //            int k = (int) (Math.random()*i);
-            int k = 5;
+            int k = i/2;
+//            int k = 5;
 
             long s1 = System.currentTimeMillis();
             int[] ans1 = topk1(nums, k);
