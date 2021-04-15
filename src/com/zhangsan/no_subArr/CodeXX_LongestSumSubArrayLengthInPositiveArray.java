@@ -1,7 +1,8 @@
-package com.zhangsan.no_11_window;
+package com.zhangsan.no_subArr;
 
 /**
  * 给定数组中, 找到累加和位K的最长子数组的长度
+ * 非负数组, 所以大小是递加的, 满足单调性所以窗口解
  *
  * @author zhangsan
  * @date 2021/4/15 20:00
@@ -13,7 +14,7 @@ public class CodeXX_LongestSumSubArrayLengthInPositiveArray {
         if (arr == null || arr.length == 0 || K <= 0)
             return 0;
         int l = 0, r = 0, ans = -1, sum = arr[0];
-        while (r < arr.length && l <= r) {
+        while (r < arr.length) {
             if (sum == K) {
                 ans = Math.max(ans, r - l + 1);
                 if (++r == arr.length) {
