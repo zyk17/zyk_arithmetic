@@ -32,6 +32,7 @@ public class CodeXX_RotateMatrix {
         }
     }
 
+    // 右旋
     private static void rightRotate(int[][] matrix, int a, int b, int c, int d) {
         int temp;
         for (int i = 0; i < c - a; i++) {
