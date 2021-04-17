@@ -9,7 +9,7 @@ import com.zhangsan.util.ArrayUtil;
  * @author zhangsan
  * @date 2021/4/17 13:20
  */
-public class Code_BestSplitForAll {
+public class Code01_BestSplitForAll {
 
     // 通过前缀和数组, 时间复杂度:O(n) , 空间复杂度O(n)
     public static int bestSplit(int[] arr) {
