@@ -104,10 +104,10 @@ public class Code02_BestSplitForEveryPosition {
         System.out.println("每一步O(N), 总(N^2):" + (s4 - s3));
         ArrayUtil.printArr(ans3);*/
 
-        int times = 10000;
+        int times = 100000;
         int maxSize = 10, maxValue = 10000;
         for (int i = 0; i < times; i++) {
-            int[] arr = ArrayUtil.generateRandomArray(maxSize*=10, maxValue, false, false);   // 包含负数
+            int[] arr = ArrayUtil.generateRandomArray(maxSize+=100, maxValue, false, true);   // 包含负数
             long s1 = System.currentTimeMillis();
             int[] ans1 = bestSplit1(arr);
             long s2 = System.currentTimeMillis();
