@@ -1,40 +1,45 @@
 package com.zhangsan.np_dc3;
 
 /**
- * DC3算法
- * 数组,字符串.后缀数组排名
+ * @author zhangsan
+ * @date 2021/4/18 18:40
  */
-public class DC3 {
+public class DC3_Template {
 
-    public int[] sa;        // sa数组是: s0,s1,s2的排名, 第i名对应原数组的第哪个位置啊
-    public int[] rank;      // 后缀数组的排名
+    public int[] sa;
+
+    public int[] rank;
+
     public int[] height;
 
-    // 传入int数组, 不能有负数. 如果像生成int数组的后缀数组. 可以把它加工成正数的在传进来使用
-    // 字符串,可以求char的ASCII码.
-    // max,是最大值是多少, 用于准备多少个桶进行基数排序的时候
-    public DC3(int[] origin, int max) {
-        sa = sa(origin, max);
+    // 构造方法的约定:
+    // 数组叫nums，如果你是字符串，请转成整型数组nums
+    // 数组中，最小值>=1
+    // 如果不满足，处理成满足的，也不会影响使用
+    // max, nums里面最大值是多少
+    public DC3_Template(int[] nums, int max) {
+        sa = sa(nums, max);
         rank = rank();
-        height = height(origin);
+        height = height(nums);
     }
 
-    /**
-     * 计算
-     */
     private int[] sa(int[] nums, int max) {
         int n = nums.length;
         int[] arr = new int[n + 3];
-        System.arraycopy(nums, 0, arr, 0, n);
+        for (int i = 0; i < n; i++) {
+            arr[i] = nums[i];
+        }
         return skew(arr, n, max);
     }
 
     private int[] skew(int[] nums, int n, int K) {
-        // n0, n1, n2的数量
         int n0 = (n + 2) / 3, n1 = (n + 1) / 3, n2 = n / 3, n02 = n0 + n2;
         int[] s12 = new int[n02 + 3], sa12 = new int[n02 + 3];
-        for (int i = 0, j = 0; i < n + (n0 - n1); ++i)
-            if (0 != i % 3) s12[j++] = i;
+        for (int i = 0, j = 0; i < n + (n0 - n1); ++i) {
+            if (0 != i % 3) {
+                s12[j++] = i;
+            }
+        }
         radixPass(nums, s12, sa12, 2, n02, K);
         radixPass(nums, sa12, s12, 1, n02, K);
         radixPass(nums, s12, sa12, 0, n02, K);
@@ -118,7 +123,6 @@ public class DC3 {
         return a1 < b1 || (a1 == b1 && leq(a2, a3, b2, b3));
     }
 
-
     private int[] rank() {
         int n = sa.length;
         int[] ans = new int[n];
@@ -146,4 +150,24 @@ public class DC3 {
         return ans;
     }
 
+    // 为了测试
+    public static int[] randomArray(int len, int maxValue) {
+        int[] arr = new int[len];
+        for (int i = 0; i < len; i++) {
+            arr[i] = (int) (Math.random() * maxValue) + 1;
+        }
+        return arr;
+    }
+
+    // 为了测试
+    public static void main(String[] args) {
+        int len = 100000000;
+        int maxValue = 100;
+        long start = System.currentTimeMillis();
+        new DC3_Template(randomArray(len, maxValue), maxValue);
+        long end = System.currentTimeMillis();
+        System.out.println("数据量 " + len + ", 运行时间 " + (end - start) + " ms");
+    }
+
 }
+
