@@ -1,6 +1,8 @@
 package com.zhangsan.no_quadrilateral_inequality;
 
-import com.zhangsan.util.ArrayUtil;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * code01的要求, 现在是求每一步的结果
@@ -104,10 +106,10 @@ public class Code02_BestSplitForEveryPosition {
         System.out.println("每一步O(N), 总(N^2):" + (s4 - s3));
         ArrayUtil.printArr(ans3);*/
 
-        int times = 100000;
+        /*int times = 100000;
         int maxSize = 10, maxValue = 10000;
         for (int i = 0; i < times; i++) {
-            int[] arr = ArrayUtil.generateRandomArray(maxSize+=100, maxValue, false, true);   // 包含负数
+            int[] arr = ArrayUtil.generateRandomArray(maxSize += 100, maxValue, false, true);   // 包含负数
             long s1 = System.currentTimeMillis();
             int[] ans1 = bestSplit1(arr);
             long s2 = System.currentTimeMillis();
@@ -115,17 +117,87 @@ public class Code02_BestSplitForEveryPosition {
             long s3 = System.currentTimeMillis();
             int[] ans3 = bestSplit3(arr);
             long s4 = System.currentTimeMillis();
-            if(!ArrayUtil.isEquals(ans1, ans2) || !ArrayUtil.isEquals(ans2, ans3)) {
+            if (!ArrayUtil.isEquals(ans1, ans2) || !ArrayUtil.isEquals(ans2, ans3)) {
                 System.out.println("OOPS");
                 break;
             }
-            System.out.println("================size:"+ maxSize +"==================");
+            System.out.println("================size:" + maxSize + "==================");
             System.out.println("窗口不回退O(N):" + (s2 - s1));
             System.out.println("暴力解每一步O(N^2),总(N^3):" + (s3 - s2));
             System.out.println("每一步O(N), 总(N^2):" + (s4 - s3));
             System.out.println("==================================");
+
+
+        }*/
+        System.out.println(min("123123132423132131231231324231123123132423132131231231324231321312312313242313213123123132423132131212312313242313213123123132423132133123132423132131231231324231321332131231231324231321312312313242313213"));
+        System.out.println(cost("123123132423132131231231324231123123132423132131231231324231321312312313242313213123123132423132131212312313242313213123123132423132133123132423132131231231324231321332131231231324231321312312313242313213"));
+    }
+
+    // 1234, 四个数组组成的字符串
+    public static int min(String s) {
+        if (s == null || s.length() < 2) return 0;
+        char[] str = s.toCharArray();
+        int l = 0, r = str.length - 1;
+        int[][] dp = new int[str.length+1][str.length + 1];
+        for (int[] nums : dp)
+            Arrays.fill(nums, -1);
+        return process(str, l, r, dp);
+    }
+
+    static int[] add = {0, 100, 200, 360, 220};
+    static int[] delete = {0, 120, 350, 200, 320};
+    private static int process(char[] str, int l, int r, int[][] dp) {
+        if (l > r)
+            return 0;
+        if(dp[l][r] != -1) return dp[l][r];
+        if(str[l] == str[r]) return process(str, l+1, r-1, dp);
+        int ladd = process(str, l, r-1, dp) + add[str[r] - '0'];        // 左边添加右边, 一定相等, 左不动, 右往前走
+        int ldel = process(str, l + 1, r, dp) + delete[str[l] - '0'];   // 左边删除, 不一定相等, 左+1, 右不变
+        int radd = process(str, l+1, r, dp) + add[str[l] - '0'];        // 右边添加左边, 一定相等, 左+1, 又不动
+        int rdel = process(str, l, r-1, dp) + delete[str[r] - '0'];     // 右边减少,不一定相等, 左不动, 有减少
+        int ans = Math.min(ladd, Math.min(ldel, Math.min(radd, rdel)));
+        dp[l][r] = ans;
+        return ans;
+    }
+
+
+    public static int cost(String str) {
+        if (str == null || str.length() < 2) {
+            return 0;
         }
 
+        Map<Character, Integer> add = new HashMap<>(4);
+        add.put('1', 100);
+        add.put('2', 200);
+        add.put('3', 360);
+        add.put('4', 220);
+        Map<Character, Integer> del = new HashMap<>(4);
+        del.put('1', 120);
+        del.put('2', 350);
+        del.put('3', 200);
+        del.put('4', 320);
+
+        int l = 0;
+        int r = str.length() - 1;
+        int cost = 0;
+        while (l < r) {
+            char lE = str.charAt(l);
+            char rE = str.charAt(r);
+            if (lE != rE) {
+                int lEMin = Math.min(add.get(lE), del.get(lE));
+                int rEMin = Math.min(add.get(rE), del.get(rE));
+                cost += Math.min(lEMin, rEMin);
+                if (lEMin > rEMin) {
+                    r--;
+                }else {
+                    l++;
+                }
+            }else {
+                l++;
+                r--;
+            }
+        }
+        return cost;
     }
 
 
