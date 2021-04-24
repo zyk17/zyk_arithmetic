@@ -161,6 +161,7 @@ public class DC3_Template {
 
     // 为了测试
     public static void main(String[] args) {
+        new DC3_Template(new int[]{12, 16, 5, 42, 21, 21, 4, 43, 13, 1}, 43);
         int len = 100000000;
         int maxValue = 100;
         long start = System.currentTimeMillis();
